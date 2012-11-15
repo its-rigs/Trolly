@@ -25,7 +25,9 @@ Before getting stated with this library you will need a few extra things:
 A user authorisation token isn't too hard to get hold of. There are instruction on how to get one on the 
 [Trello](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user). For those too lazy there is a 
 python class in the library called Authorise(). To use this class simply navigate to the file and type:
+    
     python authorise.py -a API_KEY APPLICATION_NAME WHEN_TO_EXPIRE
+
 The API key and application names are required but the "WHEN_TO_EXPIRE" will default to 1day if not specified. Running
 this file will return a URL. Copy and paste it into your browser and away you go. You might want to store this somewhere
 for future use, especially if you have set it to never expire.
