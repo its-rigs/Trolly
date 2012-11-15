@@ -96,15 +96,12 @@ create one of our new client classes.
             super( MyClient, self ).__init__( api_key, user_auth_token )
 
         def createCard( self, card_json, **kwargs ):
-            print card_json
-            test = kwargs['test']
-            print test
 
             return MyCard( 
                     trello_client = self,
                     card_id = card_json['id'],
                     name = card_json['name'],
-                    test = test
+                    test = kwargs['test']
                 )
 
 Hope this helps!
