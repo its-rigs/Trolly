@@ -40,6 +40,12 @@ inspiration on how to extend the Client class to include this check out the link
 
 ## Overview
 
+There are a number of methods for each of the Trello objects. Some accept query_parameters, these are for API methods 
+that have general methods that will accept a number of query parameters and return a lot of information. For example 
+[GET Boards](https://trello.com/docs/api/board/index.html#get-1-boards-board-id) will take a lot of query parameters to 
+allow you to whittle down the information to the bar minimum. This is extremely useful for extending the classes without
+ much extra programming.
+
 ### Trello Client
 
 This class holds the bulk of all the methods for communicating with the trello API and returning the Trello objects. 
