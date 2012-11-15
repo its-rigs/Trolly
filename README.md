@@ -24,7 +24,7 @@ Before getting stated with this library you will need a few extra things:
 
 A user authorisation token isn't too hard to get hold of. There are instruction on how to get one on the 
 [Trello](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user). For those too lazy there is a 
-python class in the library called Authorise(). To use this class simply navigate to the file and type:
+python class in the library called Authorise(). To use this class simply navigate to the file in a terminal and type:
     
     python authorise.py -a API_KEY APPLICATION_NAME WHEN_TO_EXPIRE
 
@@ -42,6 +42,20 @@ inspiration on how to extend the Client class to include this check out the link
 
 ### Trello Client
 
+This class holds the bulk of all the methods for communicating with the trello API and returning the Trello objects. 
+A client instance is required by every Trello object, becaause of this it makes extending and overiding methods in this
+class very effective as it effects all objects simultaneously.
+
+
 ### Trello Object
 
+This class is inhereted my all Trello object classes ( Board, List, Card, etc ). The class takes only one argument, a 
+Trello client instance. It also masks calls to the client as belonging to the class ( for creating objects ). This 
+allows the library to be more modular.
+
+
 ### Extending Trello Classes
+
+Extending these classes is the premise on which they were built. Below outlines an example of how this can be acheived.
+
+If for example we
