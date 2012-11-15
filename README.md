@@ -58,4 +58,57 @@ allows the library to be more modular.
 
 Extending these classes is the premise on which they were built. Below outlines an example of how this can be acheived.
 
-If for example we
+If for example we wanted to pass extra variables to our a Trello Card object then we can do the below:
+
+    class MyList( List ):
+
+        def __init__( self, trello_client, list_id, name = '' ):
+            super( MyList, self ).__init__( trello_client, list_id, name )
+
+        def getCards( self ):
+            cards = self.fetchJson( uri_path = self.base_uri + '/cards' )
+            return self.createCard( card_json = cards[0], test = 'this is a test argument' )
+
+
+This class overrides the getCards method to add the extra variable we need. This will need to be done to any Trello object that will return a custom card or you can use:
+
+    kwargs.get('test',"default value")
+
+This will help avoid a value not being passed. You could also instead of extending the object creation you could add
+a method to cache the details you want from all the object getObjectInformation method.
+
+
+We declare and pass the extra ('test') variable as a keyword argument here. 
+We then need to extend the card class to allow for the extra variables:
+
+    class MyCard( Card ):
+
+        def __init__( self, trello_client, card_id, test, name = '' ):
+            super( MyCard, self ).__init__( trello_client, card_id, name )
+            self.test_arg = test
+
+Finally, we extend and override the Client. Overriding the client means that any object that calls createCard will 
+create one of our new client classes.
+
+    class MyClient( Client ):
+
+        def __init__( self, api_key, user_auth_token ):
+            super( MyClient, self ).__init__( api_key, user_auth_token )
+
+        def createCard( self, card_json, **kwargs ):
+            print card_json
+            test = kwargs['test']
+            print test
+
+            return MyCard( 
+                    trello_client = self,
+                    card_id = card_json['id'],
+                    name = card_json['name'],
+                    test = test
+                )
+
+Hope this helps!
+
+## Licence
+
+This code is licenced under the [MIT Licence](http://opensource.org/licenses/mit-license.php)
