@@ -23,8 +23,9 @@ Before getting stated with this library you will need a few extra things:
 #### User Authorisation Token
 
 A user authorisation token isn't too hard to get hold of. There are instruction on how to get one on the 
-[Trello](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user). For those too lazy there is a 
-python class in the library called Authorise(). To use this class simply navigate to the file in a terminal and type:
+[Trello Documentation](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user). For those too 
+lazy there is a python class in the library called Authorise(). To use this class simply navigate to authorise.py in a 
+terminal and type:
     
     python authorise.py -a API_KEY APPLICATION_NAME WHEN_TO_EXPIRE
 
@@ -40,8 +41,8 @@ inspiration on how to extend the Client class to include this check out the link
 
 ## Overview
 
-There are a number of methods for each of the Trello objects. Some accept query_parameters, these are for API methods 
-that have general methods that will accept a number of query parameters and return a lot of information. For example 
+There are a number of methods for each of the Trello objects. Some accept query parameters, these are for API methods 
+that will accept a wide range of valuess and return a lot of information. For example 
 [GET Boards](https://trello.com/docs/api/board/index.html#get-1-boards-board-id) will take a lot of query parameters to 
 allow you to whittle down the information to the bar minimum. This is extremely useful for extending the classes without
  much extra programming.
@@ -49,7 +50,7 @@ allow you to whittle down the information to the bar minimum. This is extremely 
 ### Trello Client
 
 This class holds the bulk of all the methods for communicating with the trello API and returning the Trello objects. 
-A client instance is required by every Trello object, becaause of this it makes extending and overiding methods in this
+A client instance is required by every Trello object, because of this it makes extending and overiding methods in this
 class very effective as it effects all objects simultaneously.
 
 
