@@ -36,3 +36,12 @@ for future use, especially if you have set it to never expire.
 
 This library (currently) has no Oauth support however the code this was based on includes Oauth support. So for 
 inspiration on how to extend the Client class to include this check out the link above.
+
+
+## Overview
+
+### Trello Client
+
+### Trello Object
+
+### Extending Trello Classes
