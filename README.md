@@ -6,7 +6,5 @@ A wrapper around the Trello API. Provides a group of classes to represent Trello
 Extending is as simple as below:
 
 
-~~
-class yaya
-
-~~
+//class yaya
+def __init__():
