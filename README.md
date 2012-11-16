@@ -42,7 +42,7 @@ inspiration on how to extend the Client class to include this check out the link
 ## Overview
 
 There are a number of methods for each of the Trello objects. Some accept query parameters, these are for API methods 
-that will accept a wide range of valuess and return a lot of information. For example 
+that will accept a wide range of values and return a lot of information. For example 
 [GET Boards](https://trello.com/docs/api/board/index.html#get-1-boards-board-id) will take a lot of query parameters to 
 allow you to whittle down the information to the bar minimum. This is extremely useful for extending the classes without
  much extra programming.
@@ -51,14 +51,18 @@ allow you to whittle down the information to the bar minimum. This is extremely 
 
 This class holds the bulk of all the methods for communicating with the trello API and returning the Trello objects. 
 A client instance is required by every Trello object, because of this it makes extending and overiding methods in this
-class very effective as it effects all objects simultaneously.
+class very effective. This is where you would override the creating of an object, e.g. a Card, with your own object. 
 
 
 ### Trello Object
 
 This class is inhereted my all Trello object classes ( Board, List, Card, etc ). The class takes only one argument, a 
-Trello client instance. It also masks calls to the client as belonging to the class ( for creating objects ). This 
-allows the library to be more modular.
+Trello client instance. It masks calls to the client as belonging to the class ( for the purposes of modularity ).
+There are also a number of methods for fetching ( Board, List, etc ) JSON from the API. Since the only thing that 
+differs from class to class is the base URI, this is taken as the only argument. 
+
+There are a number of methods for creating Trello objects. The createOBJECTNAME methods in this class can be extended
+easily by passing them keyword arguments.
 
 
 ### Extending Trello Classes
@@ -73,20 +77,15 @@ If for example we wanted to pass extra variables to our a Trello Card object the
             super( MyList, self ).__init__( trello_client, list_id, name )
 
         def getCards( self ):
-            cards = self.fetchJson( uri_path = self.base_uri + '/cards' )
+            cards = self.getCardsJson( self.base_uri )
             return self.createCard( card_json = cards[0], test = 'this is a test argument' )
 
 
-This class overrides the getCards method to add the extra variable we need. This will need to be done to any Trello object that will return a custom card or you can use:
+This MyList class overrides the getCards method to add the extra variable we need. This would need to be done to any 
+Trello object that will return a custom card.
 
-    kwargs.get('test',"default value")
-
-This will help avoid a value not being passed. You could also instead of extending the object creation you could add
-a method to cache the details you want from all the object getObjectInformation method.
-
-
-We declare and pass the extra ('test') variable as a keyword argument here. 
-We then need to extend the card class to allow for the extra variables:
+We declare and pass the extra ('test') variable as a keyword argument here. We then need to extend the card class to 
+allow for the extra variables:
 
     class MyCard( Card ):
 
@@ -111,7 +110,14 @@ create one of our new client classes.
                     test = kwargs['test']
                 )
 
-Hope this helps!
+The above client will fail though if you fail to pass a "test" keyword argument. To get around this you
+
+    kwargs.get('test',"default value")
+
+This will help avoid a value not being passed. You could also, instead of extending the object creation, add
+a method to cache the details you want using the objects getObjectInformation method.
+
+Hope this helps and happy Trelloing!
 
 ## Licence
 
