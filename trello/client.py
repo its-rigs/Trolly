@@ -15,7 +15,7 @@ from card import Card
 from checklist import Checklist
 from member import Member
 
-from src.lib.trello.trello import Unauthorised, ResourceUnavailable
+from trello import Unauthorised, ResourceUnavailable
 
 
 class Client( object ):
