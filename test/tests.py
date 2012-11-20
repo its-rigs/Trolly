@@ -198,9 +198,9 @@ class TrelloTests( unittest.TestCase ):
         self.assertEqual( comment, new_comment, msg = "Comments don't match. Add comment didn't work!" )
 
 
-    def test_car_08_addAttachments( self ):
+    def test_car_08_addAttachment( self ):
         f = open( 'test.txt', 'r' ).read()
-        result = self.card.addAttachments( 'text.txt', f )
+        result = self.card.addAttachment( 'text.txt', f )
         self.assertIsNotNone( result, "Got nothing back, doesn't look like it worked!" )
 
 
