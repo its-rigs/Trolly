@@ -101,7 +101,7 @@ class Card( TrelloObject ):
             )
 
 
-    def addAttachments( self, filename, open_file ):
+    def addAttachment( self, filename, open_file ):
         """
         Adds an attachement to this card.
         """
