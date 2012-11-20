@@ -182,7 +182,7 @@ class Card( TrelloObject ):
         Fields is a dictionary of api_key and token. Filename is the name of the
         file and file_values is the open(file).read() string.
         """
-        boundary = '----------MediaCom_Trello_Boundary_$'
+        boundary = '----------Trello_Boundary_$'
         crlf = '\r\n'
 
         data = []
