@@ -7,14 +7,14 @@ Created on 9 Nov 2012
 import unittest
 import uuid
 
-from src.lib.trello.trello.client import Client
-from src.lib.trello.trello.organisation import Organisation
-from src.lib.trello.trello.board import Board
-from src.lib.trello.trello.list import List
-from src.lib.trello.trello.card import Card
-from src.lib.trello.trello.checklist import Checklist
-from src.lib.trello.trello.member import Member
-from src.lib.trello.trello import ResourceUnavailable
+from trolly.client import Client
+from trolly.organisation import Organisation
+from trolly.board import Board
+from trolly.list import List
+from trolly.card import Card
+from trolly.checklist import Checklist
+from trolly.member import Member
+from trolly import ResourceUnavailable
 
 
 api_key = ''
