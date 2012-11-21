@@ -202,6 +202,9 @@ class Card( TrelloObject ):
         data.append( '--' + boundary + '--' )
         data.append( '' )
 
+        # Try and avoid the damn unicode errors
+        data = [ str( segment ) for segment in data ]
+
         body = crlf.join( data )
         content_type = 'multipart/form-data; boundary=%s' % boundary
 
