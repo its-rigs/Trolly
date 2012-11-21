@@ -109,7 +109,7 @@ class Client( object ):
         """
         return Organisation( 
                 trello_client = self,
-                organisation_id = organisation_json['id'],
+                organisation_id = organisation_json['id'].encode('utf-8'),
                 name = organisation_json['name'].encode( 'utf-8' )
             )
 
@@ -120,7 +120,7 @@ class Client( object ):
         """
         return Board( 
                 trello_client = self,
-                board_id = board_json['id'],
+                board_id = board_json['id'].encode('utf-8'),
                 name = board_json['name'].encode( 'utf-8' )
             )
 
@@ -131,7 +131,7 @@ class Client( object ):
         """
         return List( 
                 trello_client = self,
-                list_id = list_json['id'],
+                list_id = list_json['id'].encode('utf-8'),
                 name = list_json['name'].encode( 'utf-8' )
             )
 
@@ -142,7 +142,7 @@ class Client( object ):
         """
         return Card( 
                 trello_client = self,
-                card_id = card_json['id'],
+                card_id = card_json['id'].encode('utf-8'),
                 name = card_json['name'].encode( 'utf-8' )
             )
 
@@ -153,7 +153,7 @@ class Client( object ):
         """
         return Checklist( 
                 trello_client = self,
-                checklist_id = checklist_json['id'],
+                checklist_id = checklist_json['id'].encode('utf-8'),
                 name = checklist_json['name'].encode( 'utf-8' )
             )
 
@@ -164,7 +164,7 @@ class Client( object ):
         """
         return Member( 
                 trello_client = self,
-                member_id = member_json['id'],
+                member_id = member_json['id'].encode('utf-8'),
                 name = member_json['fullName'].encode( 'utf-8' )
             )
 
