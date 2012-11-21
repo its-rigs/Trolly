@@ -135,7 +135,8 @@ In order to run the tests you will need:
 It's quite a lot of information to get hold of (sorry). If you don't need everything you can just comment out 
 the tests you don't need.
 
-To run the tests navigate to the Trolly in a terminal and run:
+To run the tests navigate to the Trolly in a terminal and run:  
+
     PYTHONPATH=. python test/tests.py
 
 
