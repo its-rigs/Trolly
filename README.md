@@ -119,6 +119,27 @@ a method to cache the details you want using the objects getObjectInformation me
 
 Hope this helps and happy Trelloing!
 
+
+## Running Test
+
+In order to run the tests you will need:
+- API Key
+- User authorisation token
+- An organisation ID
+- A board ID
+- A list ID
+- A card ID
+- A checklist ID
+- A member ID
+
+It's quite a lot of information to get hold of (sorry). If you don't need everything you can just comment out 
+the tests you don't need.
+
+To run the tests navigate to the Trolly in a terminal and run:
+    PYTHONPATH=. python test/tests.py
+
+
+
 ## Licence
 
 This code is licenced under the [MIT Licence](http://opensource.org/licenses/mit-license.php)
