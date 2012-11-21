@@ -199,7 +199,7 @@ class TrelloTests( unittest.TestCase ):
 
 
     def test_car_08_addAttachment( self ):
-        f = open( 'test.txt', 'r' ).read()
+        f = open( 'test/test.txt', 'r' ).read()
         result = self.card.addAttachment( 'text.txt', f )
         self.assertIsNotNone( result, "Got nothing back, doesn't look like it worked!" )
 
