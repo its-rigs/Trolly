@@ -18,6 +18,15 @@ Before getting stated with this library you will need a few extra things:
 - An [API key](https://trello.com/docs/gettingstarted/index.html#getting-an-application-key) for your Trello user
 - User authorisation token ( see below for how to obtain )
 
+### Installation
+To install either download the source and run:
+    
+    sudo python setup.py install
+
+Alternatively you can use:
+    
+    sudo pip install Trolly
+
 ### Authorisation
 
 #### User Authorisation Token
