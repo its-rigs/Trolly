@@ -110,7 +110,7 @@ create one of our new client classes.
                     test = kwargs['test']
                 )
 
-The above client will fail though if you fail to pass a "test" keyword argument. To get around this you
+The above client will fail though if you fail to pass a "test" keyword argument. To get around this you could use:
 
     kwargs.get('test',"default value")
 
