@@ -30,7 +30,7 @@ class Authorise( Client ):
 
         authorisation_url = self.buildUri( 
                 path = '/authorize',
-                query_params = query_params
+                query_params = self.addAuthorisation(query_params)
             )
 
         print 'Please go to the following URL and get the user authorisation token:\n', authorisation_url
