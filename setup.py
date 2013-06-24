@@ -14,6 +14,7 @@ setup(
         url = 'https://github.com/plish/Trolly',
         packages = ['trolly'],
         license = 'LICENCE.txt',
+        requires = ['httplib2'],
         description = 'Trello api',
         long_description = open( 'README.md' ).read()
     )
