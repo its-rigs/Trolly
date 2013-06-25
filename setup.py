@@ -8,7 +8,7 @@ from distutils.core import setup
 
 setup( 
         name = 'Trolly',
-        version = '0.1.0',
+        version = '0.1.1',
         author = 'plish',
         author_email = 'plish.development@gmail.com',
         url = 'https://github.com/plish/Trolly',
