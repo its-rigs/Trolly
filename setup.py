@@ -15,6 +15,6 @@ setup(
         packages = ['trolly'],
         license = 'LICENCE.txt',
         requires = ['httplib2'],
-        description = 'Trello api',
-        long_description = open( 'README.md' ).read()
+        description = 'Trello API Wrapper',
+        long_description = 'For more detail please see the github page'
     )
