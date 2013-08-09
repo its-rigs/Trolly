@@ -77,8 +77,27 @@ class Organisation( TrelloObject ):
                 http_method = 'DELETE'
             )
 
+    # FIXME: it doesn't work?
+    #def addMember( self, member_id ):
+    #    """
+    #    Add a member to the organisation.
+    #    """
+    #    return self.fetchJson( 
+    #            uri_path = self.base_uri + '/members/%s' % member_id,
+    #            http_method = 'PUT'
+    #        )
 
 
-
-
+    def addMember( self, email, fullname ):
+        """
+        Add a member to the organisation.
+        """
+        return self.fetchJson( 
+                uri_path = self.base_uri + '/members',
+                http_method = 'PUT',
+                query_params = {
+                    'email': email,
+                    'fullName': fullname,
+                }
+            )
 
