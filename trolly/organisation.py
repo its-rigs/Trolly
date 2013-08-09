@@ -70,27 +70,35 @@ class Organisation( TrelloObject ):
 
     def removeMember( self, member_id ):
         """
-        Remove a member from the organisation.
+        Remove a member from the organisation.Returns JSON of all members if 
+        successful or raises an Unauthorised exception if not.
         """
         return self.fetchJson( 
-                uri_path = self.base_uri + '/members',
+                uri_path = self.base_uri + '/members/%s' % ( member_id ),
                 http_method = 'DELETE'
             )
-
-    # FIXME: it doesn't work?
-    #def addMember( self, member_id ):
-    #    """
-    #    Add a member to the organisation.
-    #    """
-    #    return self.fetchJson( 
-    #            uri_path = self.base_uri + '/members/%s' % member_id,
-    #            http_method = 'PUT'
-    #        )
-
-
-    def addMember( self, email, fullname ):
+    
+    
+    def addMemberById( self, member_id, membership_type = 'normal' ):
         """
-        Add a member to the organisation.
+        Add a member to the board using the id. Membership type can be 
+        normal or admin. Returns JSON of all members if successful or raises an 
+        Unauthorised exception if not.
+        """
+        return self.fetchJson( 
+                uri_path = self.base_uri + '/members/%s' % ( member_id ),
+                http_method = 'PUT',
+                query_params = {
+                    'type': membership_type
+                }
+            )
+
+
+    def addMember( self, email, fullname, membership_type = 'normal' ):
+        """
+        Add a member to the board. Membership type can be normal or admin. 
+        Returns JSON of all members if successful or raises an Unauthorised 
+        exception if not.
         """
         return self.fetchJson( 
                 uri_path = self.base_uri + '/members',
@@ -98,6 +106,6 @@ class Organisation( TrelloObject ):
                 query_params = {
                     'email': email,
                     'fullName': fullname,
+                    'type': membership_type
                 }
             )
-

@@ -115,15 +115,46 @@ class Board( TrelloObject ):
             )
 
         return self.createList( list_json )
+    
+    
+    def addMemberById( self, member_id, membership_type = 'normal' ):
+        """
+        Add a member to the board using the id. Membership type can be 
+        normal or admin. Returns JSON of all members if successful or raises an 
+        Unauthorised exception if not.
+        """
+        return self.fetchJson( 
+                uri_path = self.base_uri + '/members/%s' % ( member_id ),
+                http_method = 'PUT',
+                query_params = {
+                    'type': membership_type
+                }
+            )
 
 
+    def addMember( self, email, fullname, membership_type = 'normal' ):
+        """
+        Add a member to the board. Membership type can be normal or admin. 
+        Returns JSON of all members if successful or raises an Unauthorised 
+        exception if not.
+        """
+        return self.fetchJson( 
+                uri_path = self.base_uri + '/members',
+                http_method = 'PUT',
+                query_params = {
+                    'email': email,
+                    'fullName': fullname,
+                    'type': membership_type
+                }
+            )
 
 
-
-
-
-
-
-
-
-
+    def removeMember( self, member_id ):
+        """
+        Remove a member from the organisation.Returns JSON of all members if 
+        successful or raises an Unauthorised exception if not.
+        """
+        return self.fetchJson( 
+                uri_path = self.base_uri + '/members/%s' % ( member_id ),
+                http_method = 'DELETE'
+            )
