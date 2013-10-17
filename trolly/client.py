@@ -179,6 +179,19 @@ class Client(object):
             data=checklist_json,
         )
 
+    def create_checklist_item(self, card_id, checklist_id, checklistitem_json):
+        """
+        Create a ChecklistItem object from JSON object
+        """
+        return ChecklistItem(
+            trello_client=self,
+            card_id=card_id,
+            checklist_id=checklist_id,
+            checklistitem_id=checklistitem_json['id'].encode('utf-8'),
+            name=checklistitem_json['name'].encode('utf-8'),
+            state=checklistitem_json['state'].encode('utf-8')
+        )
+
     def create_member(self, member_json):
         '''
         Create a Member object from JSON object
