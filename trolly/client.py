@@ -6,14 +6,17 @@ Created on 8 Nov 2012
 
 import json
 from httplib2 import Http
-from urllib import urlencode
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 
-from organisation import Organisation
-from board import Board
-from list import List
-from card import Card
-from checklist import Checklist
-from member import Member
+from trolly.organisation import Organisation
+from trolly.board import Board
+from trolly.list import List
+from trolly.card import Card
+from trolly.checklist import Checklist
+from trolly.member import Member
 
 from trolly import Unauthorised, ResourceUnavailable
 
@@ -91,7 +94,7 @@ class Client( object ):
             headers['Content-Type'] = 'application/json'
 
         headers['Accept'] = 'application/json'
-        response, content = self.client.request( 
+        response, content = self.client.request(
                 uri = uri,
                 method = http_method,
                 body = body,
@@ -100,14 +103,14 @@ class Client( object ):
 
         self.checkErrors( uri, response )
 
-        return json.loads( content )
+        return json.loads( str(content) )
 
 
     def createOrganisation( self, organisation_json ):
         """
         Create an Organisation object from a JSON object
         """
-        return Organisation( 
+        return Organisation(
                 trello_client = self,
                 organisation_id = organisation_json['id'].encode('utf-8'),
                 name = organisation_json['name'].encode( 'utf-8' )
@@ -118,7 +121,7 @@ class Client( object ):
         """
         Create Board object from a JSON object
         """
-        return Board( 
+        return Board(
                 trello_client = self,
                 board_id = board_json['id'].encode('utf-8'),
                 name = board_json['name'].encode( 'utf-8' )
@@ -129,7 +132,7 @@ class Client( object ):
         """
         Create List object from JSON object
         """
-        return List( 
+        return List(
                 trello_client = self,
                 list_id = list_json['id'].encode('utf-8'),
                 name = list_json['name'].encode( 'utf-8' )
@@ -140,7 +143,7 @@ class Client( object ):
         """
         Create a Card object from JSON object
         """
-        return Card( 
+        return Card(
                 trello_client = self,
                 card_id = card_json['id'].encode('utf-8'),
                 name = card_json['name'].encode( 'utf-8' )
@@ -151,7 +154,7 @@ class Client( object ):
         """
         Create a Checklist object from JSON object
         """
-        return Checklist( 
+        return Checklist(
                 trello_client = self,
                 checklist_id = checklist_json['id'].encode('utf-8'),
                 name = checklist_json['name'].encode( 'utf-8' )
@@ -162,7 +165,7 @@ class Client( object ):
         """
         Create a Member object from JSON object
         """
-        return Member( 
+        return Member(
                 trello_client = self,
                 member_id = member_json['id'].encode('utf-8'),
                 name = member_json['fullName'].encode( 'utf-8' )

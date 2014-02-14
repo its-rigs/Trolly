@@ -6,7 +6,7 @@ Created on 8 Nov 2012
 
 import mimetypes
 
-from trelloobject import TrelloObject
+from trolly.trelloobject import TrelloObject
 
 
 class Card( TrelloObject ):
@@ -28,7 +28,7 @@ class Card( TrelloObject ):
         """
         Get information for this card. Returns a dictionary of values.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri,
                 query_params = query_params
             )
@@ -81,7 +81,7 @@ class Card( TrelloObject ):
         """
         Update information for this card. Returns a new Card object.
         """
-        card_json = self.fetchJson( 
+        card_json = self.fetchJson(
                 uri_path = self.base_uri,
                 http_method = 'PUT',
                 query_params = query_params
@@ -94,7 +94,7 @@ class Card( TrelloObject ):
         """
         Adds a comment to this card by the current user.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/actions/comments',
                 http_method = 'POST',
                 query_params = { 'text': comment_text }
@@ -110,13 +110,13 @@ class Card( TrelloObject ):
                 'token': self.client.user_auth_token
             }
 
-        content_type, body = self.encodeMultipartFormdata( 
+        content_type, body = self.encodeMultipartFormdata(
                 fields = fields,
                 filename = filename,
                 file_values = open_file
             )
 
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/attachments',
                 http_method = 'POST',
                 body = body,
@@ -129,7 +129,7 @@ class Card( TrelloObject ):
         """
         Add a checklist to this card. Returns a Checklist object.
         """
-        checklist_json = self.fetchJson( 
+        checklist_json = self.fetchJson(
                 uri_path = self.base_uri + '/checklists',
                 http_method = 'POST',
                 query_params = query_params
@@ -142,7 +142,7 @@ class Card( TrelloObject ):
         """
         Add a label to this card.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/labels',
                 http_method = 'POST',
                 query_params = query_params
@@ -153,7 +153,7 @@ class Card( TrelloObject ):
         """
         Add a member to this card. Returns a list of Member objects.
         """
-        members = self.fetchJson( 
+        members = self.fetchJson(
                 uri_path = self.base_uri + '/members',
                 http_method = 'POST',
                 query_params = { 'value': member_id }
@@ -170,7 +170,7 @@ class Card( TrelloObject ):
         """
         Remove a member from this card.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/members/' + member_id,
                 http_method = 'DELETE'
             )

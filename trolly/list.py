@@ -4,7 +4,7 @@ Created on 8 Nov 2012
 @author: plish
 '''
 
-from trelloobject import TrelloObject
+from trolly.trelloobject import TrelloObject
 
 
 class List( TrelloObject ):
@@ -25,7 +25,7 @@ class List( TrelloObject ):
         """
         Get information for this list. Returns a dictionary of values.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri,
                 query_params = query_params
             )
@@ -57,7 +57,7 @@ class List( TrelloObject ):
         """
         Update information for this list. Returns a new List object.
         """
-        list_json = self.fetchJson( 
+        list_json = self.fetchJson(
                 uri_path = self.base_uri,
                 http_method = 'PUT',
                 query_params = query_params
@@ -70,7 +70,7 @@ class List( TrelloObject ):
         """
         Create a card for this list. Returns a Card object.
         """
-        card_json = self.fetchJson( 
+        card_json = self.fetchJson(
                 uri_path = self.base_uri + '/cards',
                 http_method = 'POST',
                 query_params = query_params

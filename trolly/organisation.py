@@ -4,7 +4,7 @@ Created on 14 Nov 2012
 @author: plish
 '''
 
-from trelloobject import TrelloObject
+from trolly.trelloobject import TrelloObject
 
 
 class Organisation( TrelloObject ):
@@ -22,7 +22,7 @@ class Organisation( TrelloObject ):
         """
         Get information fot this organisation. Returns a dictionary of values.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri,
                 query_params = query_params
             )
@@ -59,7 +59,7 @@ class Organisation( TrelloObject ):
         """
         Update this organisations information. Returns a new organisation object.
         """
-        organisation_json = self.fetchJson( 
+        organisation_json = self.fetchJson(
                 uri_path = self.base_uri,
                 http_method = 'PUT',
                 query_params = query_params
@@ -70,22 +70,22 @@ class Organisation( TrelloObject ):
 
     def removeMember( self, member_id ):
         """
-        Remove a member from the organisation.Returns JSON of all members if 
+        Remove a member from the organisation.Returns JSON of all members if
         successful or raises an Unauthorised exception if not.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/members/%s' % ( member_id ),
                 http_method = 'DELETE'
             )
-    
-    
+
+
     def addMemberById( self, member_id, membership_type = 'normal' ):
         """
-        Add a member to the board using the id. Membership type can be 
-        normal or admin. Returns JSON of all members if successful or raises an 
+        Add a member to the board using the id. Membership type can be
+        normal or admin. Returns JSON of all members if successful or raises an
         Unauthorised exception if not.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/members/%s' % ( member_id ),
                 http_method = 'PUT',
                 query_params = {
@@ -96,11 +96,11 @@ class Organisation( TrelloObject ):
 
     def addMember( self, email, fullname, membership_type = 'normal' ):
         """
-        Add a member to the board. Membership type can be normal or admin. 
-        Returns JSON of all members if successful or raises an Unauthorised 
+        Add a member to the board. Membership type can be normal or admin.
+        Returns JSON of all members if successful or raises an Unauthorised
         exception if not.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/members',
                 http_method = 'PUT',
                 query_params = {

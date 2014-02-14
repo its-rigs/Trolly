@@ -4,7 +4,7 @@ Created on 9 Nov 2012
 @author: plish
 '''
 
-from trelloobject import TrelloObject
+from trolly.trelloobject import TrelloObject
 
 
 class Member( TrelloObject ):
@@ -25,7 +25,7 @@ class Member( TrelloObject ):
         """
         Get Information for a memeber. Returns a dictionary of values.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri,
                 query_params = query_params
             )
