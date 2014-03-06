@@ -4,7 +4,7 @@ Created on 8 Nov 2012
 @author: plish
 '''
 
-from client import Client
+from trolly.client import Client
 
 
 class Authorise( Client ):
@@ -28,7 +28,7 @@ class Authorise( Client ):
                 'scope': 'read,write'
             }
 
-        authorisation_url = self.buildUri( 
+        authorisation_url = self.buildUri(
                 path = '/authorize',
                 query_params = self.addAuthorisation(query_params)
             )
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         pass
 
     if option in ( '-h', '--h', '-help' ):
-        print '\n%s \n\t%s \n\t%s \n\t%s\n\n' % ( 
+        print '\n%s \n\t%s \n\t%s \n\t%s\n\n' % (
                 'Use the -a option to get the authorisation URL.',
                 'First argument API key.',
                 'Second Argument application name',

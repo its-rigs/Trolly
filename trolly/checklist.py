@@ -4,7 +4,7 @@ Created on 13 Nov 2012
 @author: plish
 '''
 
-from trelloobject import TrelloObject
+from trolly.trelloobject import TrelloObject
 
 
 class Checklist( TrelloObject ):
@@ -24,7 +24,7 @@ class Checklist( TrelloObject ):
         """
         Get all information for this Checklist. Returns a dictionary of values.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri,
                 query_params = query_params
             )
@@ -35,7 +35,7 @@ class Checklist( TrelloObject ):
         Get all the items for this checklist. Returns a list of dictionaries.
         Each dictionary has the values for an item.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/checkItems',
                 query_params = query_params
             )
@@ -45,7 +45,7 @@ class Checklist( TrelloObject ):
         """
         Update the current checklist. Returns a new Checklist object.
         """
-        checklist_json = self.fetchJson( 
+        checklist_json = self.fetchJson(
                 uri_path = self.base_uri,
                 http_method = 'PUT',
                 query_params = { 'name': name }
@@ -58,7 +58,7 @@ class Checklist( TrelloObject ):
         """
         Add an item to this checklist. Returns a dictionary of values of new item.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/checkItems',
                 http_method = 'POST',
                 query_params = query_params
@@ -69,7 +69,7 @@ class Checklist( TrelloObject ):
         """
         Deletes an item from this checklist.
         """
-        return self.fetchJson( 
+        return self.fetchJson(
                 uri_path = self.base_uri + '/checkItems/' + item_id,
                 http_method = 'DELETE'
             )
