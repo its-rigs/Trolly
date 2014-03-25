@@ -103,7 +103,7 @@ class Client( object ):
 
         self.checkErrors( uri, response )
 
-        return json.loads( str(content) )
+        return json.loads( content.decode() )
 
 
     def createOrganisation( self, organisation_json ):
