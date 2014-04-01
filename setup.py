@@ -14,7 +14,7 @@ setup(
         url = 'https://github.com/plish/Trolly',
         packages = ['trolly'],
         license = 'LICENCE.txt',
-        requires = ['httplib2'],
+        install_requires = ['httplib2'],
         description = 'Trello API Wrapper',
         long_description = 'For more detail please see the github page'
     )
