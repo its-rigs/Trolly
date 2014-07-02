@@ -4,6 +4,8 @@ Created on 8 Nov 2012
 @author: plish
 '''
 
+from __future__ import print_function
+
 from trolly.client import Client
 
 
@@ -33,7 +35,7 @@ class Authorise( Client ):
                 query_params = self.addAuthorisation(query_params)
             )
 
-        print 'Please go to the following URL and get the user authorisation token:\n', authorisation_url
+        print('Please go to the following URL and get the user authorisation token:\n', authorisation_url)
         return authorisation_url
 
 
@@ -58,19 +60,19 @@ if __name__ == "__main__":
         pass
 
     if option in ( '-h', '--h', '-help' ):
-        print '\n%s \n\t%s \n\t%s \n\t%s\n\n' % (
+        print('\n%s \n\t%s \n\t%s \n\t%s\n\n' % (
                 'Use the -a option to get the authorisation URL.',
                 'First argument API key.',
                 'Second Argument application name',
                 'Third argument token expires (optional, default is 1day)'
-            )
+            ))
 
     elif option == '-a':
         authorise = Authorise( api_key )
         authorise.getAuthorisationUrl( application_name, token_expires )
 
     else:
-        print "Try running from a terminal using --h for help"
+        print("Try running from a terminal using --h for help")
 
 
 
