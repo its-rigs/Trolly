@@ -88,9 +88,7 @@ class Client( object ):
         query_params = self.addAuthorisation( query_params )
         uri = self.buildUri( uri_path, query_params )
 
-        if ( http_method in ( "POST", "PUT", "DELETE" ) and not
-             headers.has_key( 'Content-Type' ) ):
-
+        if http_method in ( "POST", "PUT", "DELETE" ) and 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
 
         headers['Accept'] = 'application/json'
