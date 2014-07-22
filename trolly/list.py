@@ -20,55 +20,70 @@ class List(TrelloObject):
 
         self.base_uri = '/lists/' + self.id
 
-    def getListInformation(self, query_params={}):
+    def get_list_information(self, query_params=None):
         """
         Get information for this list. Returns a dictionary of values.
         """
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri,
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-    def getBoard(self):
+    def get_board(self):
         """
         Get the board that this list belongs to. Returns a Board object.
         """
-        board_json = self.getBoardJson(self.base_uri)
+        board_json = self.get_board_json(self.base_uri)
+        return self.create_board(board_json)
 
-        return self.createBoard(board_json)
-
-    def getCards(self):
+    def get_cards(self):
         """
         Get cards for this list. Returns a list of Card objects
         """
-        cards = self.getCardsJson(self.base_uri)
+        cards = self.get_cards_json(self.base_uri)
 
         cards_list = []
         for card_json in cards:
-            cards_list.append(self.createCard(card_json))
+            cards_list.append(self.create_card(card_json))
 
         return cards_list
 
-    def updateList(self, query_params={}):
+    def update_list(self, query_params=None):
         """
         Update information for this list. Returns a new List object.
         """
-        list_json = self.fetchJson(
+        list_json = self.fetch_json(
             uri_path=self.base_uri,
             http_method='PUT',
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-        return self.createList(list_json)
+        return self.create_list(list_json)
 
-    def addCard(self, query_params={}):
+    def add_card(self, query_params=None):
         """
         Create a card for this list. Returns a Card object.
         """
-        card_json = self.fetchJson(
+        card_json = self.fetch_json(
             uri_path=self.base_uri + '/cards',
             http_method='POST',
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-        return self.createCard(card_json)
+        return self.create_card(card_json)
+
+    # Deprecated
+    def getListInformation(self, query_params=None):
+        return self.get_list_information(query_params)
+
+    def getBoard(self):
+        return self.get_board()
+
+    def getCards(self):
+        return self.get_cards()
+
+    def updateList(self, query_params=None):
+        return self.update_list(query_params)
+
+    def addCard(self, query_params=None):
+        return self.add_card(query_params)
