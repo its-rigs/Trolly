@@ -22,7 +22,7 @@ from trolly.member import Member
 from trolly import Unauthorised, ResourceUnavailable
 
 
-class Client(object):
+class Client( object ):
     """
     A class that has all the logic for communicating with Trello and returning
     information to the user
