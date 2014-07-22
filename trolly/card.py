@@ -23,125 +23,124 @@ class Card(TrelloObject):
 
         self.base_uri = '/cards/' + self.id
 
-    def getCardInformation(self, query_params={}):
+    def get_card_information(self, query_params=None):
         """
         Get information for this card. Returns a dictionary of values.
         """
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri,
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-    def getBoard(self):
+    def get_board(self):
         """
         Get board information for this card. Returns a Board object.
         """
-        board_json = self.getBoardJson(self.base_uri)
-        return self.createBoard(board_json)
+        board_json = self.get_board_json(self.base_uri)
+        return self.create_board(board_json)
 
-    def getList(self):
+    def get_list(self):
         """
         Get list information for this card. Returns a List object.
         """
-        list_json = self.getListJson(self.base_uri)
+        list_json = self.get_list_json(self.base_uri)
+        return self.create_list(list_json)
 
-        return self.createList(list_json)
-
-    def getChecklists(self):
+    def get_checklists(self):
         """
         Get the checklists for this card. Returns a list of Checklist objects.
         """
-        checklists = self.getChecklistsJson(self.base_uri)
+        checklists = self.get_checklist_json(self.base_uri)
 
         checklists_list = []
         for checklist_json in checklists:
-            checklists_list.append(self.createChecklist(checklist_json))
+            checklists_list.append(self.create_checklist(checklist_json))
 
         return checklists_list
 
-    def getMembers(self):
+    def get_members(self):
         """
         Get all members attached to this card. Returns a list of Member objects.
         """
-        members = self.getMembersJson(self.base_uri)
+        members = self.get_members_json(self.base_uri)
 
         members_list = []
         for member_json in members:
-            members_list.append(self.createMember(member_json))
+            members_list.append(self.create_member(member_json))
 
         return members_list
 
-    def updateCard(self, query_params={}):
+    def update_card(self, query_params=None):
         """
         Update information for this card. Returns a new Card object.
         """
-        card_json = self.fetchJson(
+        card_json = self.fetch_json(
             uri_path=self.base_uri,
             http_method='PUT',
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-        return self.createCard(card_json)
+        return self.create_card(card_json)
 
-    def addComments(self, comment_text):
+    def add_comments(self, comment_text):
         """
         Adds a comment to this card by the current user.
         """
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri + '/actions/comments',
             http_method='POST',
             query_params={'text': comment_text}
         )
 
-    def addAttachment(self, filename, open_file):
+    def add_attachment(self, filename, open_file):
         """
-        Adds an attachement to this card.
+        Adds an attachment to this card.
         """
         fields = {
             'api_key': self.client.api_key,
             'token': self.client.user_auth_token
         }
 
-        content_type, body = self.encodeMultipartFormdata(
+        content_type, body = self.encode_multipart_formdata(
             fields=fields,
             filename=filename,
             file_values=open_file
         )
 
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri + '/attachments',
             http_method='POST',
             body=body,
             headers={'Content-Type': content_type},
         )
 
-    def addChecklists(self, query_params={}):
+    def add_checklists(self, query_params=None):
         """
         Add a checklist to this card. Returns a Checklist object.
         """
-        checklist_json = self.fetchJson(
+        checklist_json = self.fetch_json(
             uri_path=self.base_uri + '/checklists',
             http_method='POST',
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-        return self.createChecklist(checklist_json)
+        return self.create_checklist(checklist_json)
 
-    def addLabels(self, query_params={}):
+    def add_labels(self, query_params=None):
         """
         Add a label to this card.
         """
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri + '/labels',
             http_method='POST',
-            query_params=query_params
+            query_params=query_params or {}
         )
 
-    def addMember(self, member_id):
+    def add_member(self, member_id):
         """
         Add a member to this card. Returns a list of Member objects.
         """
-        members = self.fetchJson(
+        members = self.fetch_json(
             uri_path=self.base_uri + '/members',
             http_method='POST',
             query_params={'value': member_id}
@@ -149,20 +148,20 @@ class Card(TrelloObject):
 
         members_list = []
         for member_json in members:
-            members_list.append(self.createMember(member_json))
+            members_list.append(self.create_member(member_json))
 
         return members_list
 
-    def removeMember(self, member_id):
+    def remove_member(self, member_id):
         """
         Remove a member from this card.
         """
-        return self.fetchJson(
+        return self.fetch_json(
             uri_path=self.base_uri + '/members/' + member_id,
             http_method='DELETE'
         )
 
-    def encodeMultipartFormdata(self, fields, filename, file_values):
+    def encode_multipart_formdata(self, fields, filename, file_values):
         """
         Encodes data to updload a file to Trello.
         Fields is a dictionary of api_key and token. Filename is the name of the
@@ -180,8 +179,8 @@ class Card(TrelloObject):
             data.append(fields[key])
 
         data.append('--' + boundary)
-        data.append('Content-Disposition: form-data; name="file"; filename="%s"' % ( filename ))
-        data.append('Content-Type: %s' % self.getContentType(filename))
+        data.append('Content-Disposition: form-data; name="file"; filename="%s"' % filename)
+        data.append('Content-Type: %s' % self.get_content_type(filename))
         data.append('')
         data.append(file_values)
 
@@ -196,10 +195,51 @@ class Card(TrelloObject):
 
         return content_type, body
 
-    def getContentType(self, filename):
+    def get_content_type(self, filename):
         return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
 
+    # Deprecated
+    def getCardInformation(self, query_params=None):
+        return self.get_card_information(query_params)
 
+    def getBoard(self):
+        return self.get_board()
+
+    def getList(self):
+        return self.get_list()
+
+    def getChecklists(self):
+        return self.get_checklists()
+
+    def getMembers(self):
+        return self.get_members()
+
+    def updateCard(self, query_params=None):
+        return self.update_card(query_params)
+
+    def addComments(self, comment_text):
+        return self.add_comments(comment_text)
+
+    def addAttachment(self, filename, open_file):
+        return self.add_attachment(filename, open_file)
+
+    def addChecklists(self, query_params=None):
+        return self.add_checklists(query_params)
+
+    def addLabels(self, query_params=None):
+        return self.add_labels(query_params)
+
+    def addMember(self, member_id):
+        return self.add_member(member_id)
+
+    def removeMember(self, member_id):
+        return self.remove_member(member_id)
+
+    def encodeMultipartFormdata(self, fields, filename, file_values):
+        return self.encode_multipart_formdata(fields, filename, file_values)
+
+    def getContentType(self, filename):
+        return self.get_content_type(filename)
 
 
 
