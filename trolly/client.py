@@ -76,15 +76,18 @@ class Client(object):
 
         return url
 
-    def fetch_json(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
+    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
         """
         Make a call to Trello API and capture JSON response. Raises an error
         when it fails.
         """
+        query_params = query_params or {}
+        headers = headers or {}
+
         query_params = self.add_authorisation(query_params)
         uri = self.build_uri(uri_path, query_params)
 
-        if http_method in ( "POST", "PUT", "DELETE" ) and 'Content-Type' not in headers:
+        if http_method in ("POST", "PUT", "DELETE") and 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
 
         headers['Accept'] = 'application/json'
