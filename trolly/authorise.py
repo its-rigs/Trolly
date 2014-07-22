@@ -74,14 +74,3 @@ if __name__ == "__main__":
 
     else:
         print("Try running from a terminal using --h for help")
-
-
-
-
-
-
-
-
-
-
-
