@@ -1,8 +1,8 @@
-'''
+"""
 Created on 14 Nov 2012
 
 @author: plish
-'''
+"""
 
 from trolly.trelloobject import TrelloObject
 
@@ -16,7 +16,6 @@ class Organisation(TrelloObject):
 
         self.base_uri = '/organizations/' + self.id
 
-
     def getOrganisationInformation(self, query_params={}):
         """
         Get information fot this organisation. Returns a dictionary of values.
@@ -25,7 +24,6 @@ class Organisation(TrelloObject):
             uri_path=self.base_uri,
             query_params=query_params
         )
-
 
     def getBoards(self):
         """
@@ -38,7 +36,6 @@ class Organisation(TrelloObject):
             boards_list.append(self.createBoard(board_json))
 
         return boards_list
-
 
     def getMembers(self):
         """
@@ -53,7 +50,6 @@ class Organisation(TrelloObject):
 
         return members_list
 
-
     def updateOrganisation(self, query_params={}):
         """
         Update this organisations information. Returns a new organisation object.
@@ -66,7 +62,6 @@ class Organisation(TrelloObject):
 
         return self.createOrganisation(organisation_json)
 
-
     def removeMember(self, member_id):
         """
         Remove a member from the organisation.Returns JSON of all members if
@@ -76,7 +71,6 @@ class Organisation(TrelloObject):
             uri_path=self.base_uri + '/members/%s' % ( member_id ),
             http_method='DELETE'
         )
-
 
     def addMemberById(self, member_id, membership_type='normal'):
         """
@@ -91,7 +85,6 @@ class Organisation(TrelloObject):
                 'type': membership_type
             }
         )
-
 
     def addMember(self, email, fullname, membership_type='normal'):
         """
@@ -108,6 +101,3 @@ class Organisation(TrelloObject):
                 'type': membership_type
             }
         )
-
-
-

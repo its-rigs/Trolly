@@ -1,8 +1,8 @@
-'''
+"""
 Created on 13 Nov 2012
 
 @author: plish
-'''
+"""
 
 from trolly.trelloobject import TrelloObject
 
@@ -20,7 +20,6 @@ class Checklist(TrelloObject):
 
         self.base_uri = '/checklists/' + self.id
 
-
     def getChecklistInformation(self, query_params={}):
         """
         Get all information for this Checklist. Returns a dictionary of values.
@@ -29,7 +28,6 @@ class Checklist(TrelloObject):
             uri_path=self.base_uri,
             query_params=query_params
         )
-
 
     def getItems(self, query_params={}):
         """
@@ -40,7 +38,6 @@ class Checklist(TrelloObject):
             uri_path=self.base_uri + '/checkItems',
             query_params=query_params
         )
-
 
     def updateChecklist(self, name):
         """
@@ -54,7 +51,6 @@ class Checklist(TrelloObject):
 
         return self.createChecklist(checklist_json)
 
-
     def addItem(self, query_params={}):
         """
         Add an item to this checklist. Returns a dictionary of values of new item.
@@ -64,7 +60,6 @@ class Checklist(TrelloObject):
             http_method='POST',
             query_params=query_params
         )
-
 
     def removeItem(self, item_id):
         """

@@ -1,8 +1,8 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 from trolly.trelloobject import TrelloObject
 
@@ -13,14 +13,12 @@ class Board(TrelloObject):
     """
 
     def __init__(self, trello_client, board_id, name=''):
-
         super(Board, self).__init__(trello_client)
 
         self.id = board_id
         self.name = name
 
         self.base_uri = '/boards/' + self.id
-
 
     def getBoardInformation(self, query_params={}):
         """
@@ -30,7 +28,6 @@ class Board(TrelloObject):
             uri_path='/boards/' + self.id,
             query_params=query_params
         )
-
 
     def getLists(self):
         """
@@ -44,7 +41,6 @@ class Board(TrelloObject):
 
         return lists_list
 
-
     def getCards(self):
         """
         Get the cards for this board. Returns a list of Card objects.
@@ -57,7 +53,6 @@ class Board(TrelloObject):
 
         return cards_list
 
-
     def getCard(self, card_id):
         """
         Get a Card for a given card id. Returns a Card object.
@@ -67,7 +62,6 @@ class Board(TrelloObject):
         )
 
         return self.createCard(card_json)
-
 
     def getMembers(self):
         """
@@ -81,7 +75,6 @@ class Board(TrelloObject):
 
         return members_list
 
-
     def getOrganisation(self):
         """
         Get the Organisation for this board. Returns Organisation object.
@@ -89,7 +82,6 @@ class Board(TrelloObject):
         organisation_json = self.getOrganisationsJson(self.base_uri)
 
         return self.createOrganisation(organisation_json)
-
 
     def updateBoard(self, query_params={}):
         """
@@ -103,7 +95,6 @@ class Board(TrelloObject):
 
         return self.createBoard(board_json)
 
-
     def addList(self, query_params={}):
         """
         Create a list for a board. Returns a new List object.
@@ -115,7 +106,6 @@ class Board(TrelloObject):
         )
 
         return self.createList(list_json)
-
 
     def addMemberById(self, member_id, membership_type='normal'):
         """
@@ -130,7 +120,6 @@ class Board(TrelloObject):
                 'type': membership_type
             }
         )
-
 
     def addMember(self, email, fullname, membership_type='normal'):
         """
@@ -147,7 +136,6 @@ class Board(TrelloObject):
                 'type': membership_type
             }
         )
-
 
     def removeMember(self, member_id):
         """

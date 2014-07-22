@@ -1,8 +1,8 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 import mimetypes
 
@@ -23,7 +23,6 @@ class Card(TrelloObject):
 
         self.base_uri = '/cards/' + self.id
 
-
     def getCardInformation(self, query_params={}):
         """
         Get information for this card. Returns a dictionary of values.
@@ -33,14 +32,12 @@ class Card(TrelloObject):
             query_params=query_params
         )
 
-
     def getBoard(self):
         """
         Get board information for this card. Returns a Board object.
         """
         board_json = self.getBoardJson(self.base_uri)
         return self.createBoard(board_json)
-
 
     def getList(self):
         """
@@ -49,7 +46,6 @@ class Card(TrelloObject):
         list_json = self.getListJson(self.base_uri)
 
         return self.createList(list_json)
-
 
     def getChecklists(self):
         """
@@ -63,7 +59,6 @@ class Card(TrelloObject):
 
         return checklists_list
 
-
     def getMembers(self):
         """
         Get all members attached to this card. Returns a list of Member objects.
@@ -75,7 +70,6 @@ class Card(TrelloObject):
             members_list.append(self.createMember(member_json))
 
         return members_list
-
 
     def updateCard(self, query_params={}):
         """
@@ -89,7 +83,6 @@ class Card(TrelloObject):
 
         return self.createCard(card_json)
 
-
     def addComments(self, comment_text):
         """
         Adds a comment to this card by the current user.
@@ -99,7 +92,6 @@ class Card(TrelloObject):
             http_method='POST',
             query_params={'text': comment_text}
         )
-
 
     def addAttachment(self, filename, open_file):
         """
@@ -123,7 +115,6 @@ class Card(TrelloObject):
             headers={'Content-Type': content_type},
         )
 
-
     def addChecklists(self, query_params={}):
         """
         Add a checklist to this card. Returns a Checklist object.
@@ -136,7 +127,6 @@ class Card(TrelloObject):
 
         return self.createChecklist(checklist_json)
 
-
     def addLabels(self, query_params={}):
         """
         Add a label to this card.
@@ -146,7 +136,6 @@ class Card(TrelloObject):
             http_method='POST',
             query_params=query_params
         )
-
 
     def addMember(self, member_id):
         """
@@ -164,7 +153,6 @@ class Card(TrelloObject):
 
         return members_list
 
-
     def removeMember(self, member_id):
         """
         Remove a member from this card.
@@ -173,7 +161,6 @@ class Card(TrelloObject):
             uri_path=self.base_uri + '/members/' + member_id,
             http_method='DELETE'
         )
-
 
     def encodeMultipartFormdata(self, fields, filename, file_values):
         """
@@ -208,7 +195,6 @@ class Card(TrelloObject):
         content_type = 'multipart/form-data; boundary=%s' % boundary
 
         return content_type, body
-
 
     def getContentType(self, filename):
         return mimetypes.guess_type(filename)[0] or 'application/octet-stream'

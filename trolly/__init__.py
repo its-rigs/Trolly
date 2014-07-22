@@ -1,8 +1,8 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 
 class ResourceUnavailable(Exception):
@@ -16,7 +16,7 @@ class ResourceUnavailable(Exception):
         self.status = http_response.status
 
     def __str__(self):
-        return "Resource unavailable: %s (HTTP status: %s)" % ( self.message, self.status )
+        return "Resource unavailable: %s (HTTP status: %s)" % (self.message, self.status)
 
 
 class Unauthorised(Exception):
@@ -30,4 +30,4 @@ class Unauthorised(Exception):
         self.status = http_response.status
 
     def __str__(self):
-        return "Unauthorised access to resource: %s (HTTP status: %s)" % ( self.message, self.status )
+        return "Unauthorised access to resource: %s (HTTP status: %s)" % (self.message, self.status)

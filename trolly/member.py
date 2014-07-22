@@ -1,8 +1,8 @@
-'''
+"""
 Created on 9 Nov 2012
 
 @author: plish
-'''
+"""
 
 from trolly.trelloobject import TrelloObject
 
@@ -20,7 +20,6 @@ class Member(TrelloObject):
 
         self.base_uri = '/members/' + self.id
 
-
     def getMemberInformation(self, query_params={}):
         """
         Get Information for a memeber. Returns a dictionary of values.
@@ -29,7 +28,6 @@ class Member(TrelloObject):
             uri_path=self.base_uri,
             query_params=query_params
         )
-
 
     def getBoards(self):
         """
@@ -42,7 +40,6 @@ class Member(TrelloObject):
             boards_list.append(self.createBoard(board_json))
 
         return boards_list
-
 
     def getCards(self):
         """

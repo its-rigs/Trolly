@@ -1,8 +1,8 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 import json
 from httplib2 import Http
@@ -22,7 +22,7 @@ from trolly.member import Member
 from trolly import Unauthorised, ResourceUnavailable
 
 
-class Client( object ):
+class Client(object):
     """
     A class that has all the logic for communicating with Trello and returning
     information to the user
@@ -38,7 +38,6 @@ class Client( object ):
 
         self.client = Http()
 
-
     def add_authorisation(self, query_params):
         """
         Adds the API key and user auth token to the query parameters
@@ -50,15 +49,13 @@ class Client( object ):
 
         return query_params
 
-
     def clean_path(self, path):
         """
-        Ensure the path has a preceeding /
+        Ensure the path has a preceding /
         """
         if path[0] != '/':
             path = '/' + path
         return path
-
 
     def check_errors(self, uri, response):
         """
@@ -70,7 +67,6 @@ class Client( object ):
         if response.status != 200:
             raise ResourceUnavailable(uri, response)
 
-
     def build_uri(self, path, query_params):
         """
         Build the URI for the API call.
@@ -79,7 +75,6 @@ class Client( object ):
         url += '?' + urlencode(query_params)
 
         return url
-
 
     def fetch_json(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
         """
@@ -104,17 +99,15 @@ class Client( object ):
 
         return json.loads(content.decode())
 
-
     def create_organisation(self, organisation_json):
         """
         Create an Organisation object from a JSON object
         """
         return Organisation(
             trello_client=self,
-            organisation_id=organisation_json['id'].encode('utf-8'),
-            name=organisation_json['name'].encode('utf-8')
+            organisation_id=organisation_json['id'],
+            name=organisation_json['name']
         )
-
 
     def create_board(self, board_json):
         """
@@ -122,10 +115,9 @@ class Client( object ):
         """
         return Board(
             trello_client=self,
-            board_id=board_json['id'].encode('utf-8'),
-            name=board_json['name'].encode('utf-8')
+            board_id=board_json['id'],
+            name=board_json['name']
         )
-
 
     def create_list(self, list_json):
         """
@@ -133,10 +125,9 @@ class Client( object ):
         """
         return List(
             trello_client=self,
-            list_id=list_json['id'].encode('utf-8'),
-            name=list_json['name'].encode('utf-8')
+            list_id=list_json['id'],
+            name=list_json['name']
         )
-
 
     def create_card(self, card_json):
         """
@@ -144,10 +135,9 @@ class Client( object ):
         """
         return Card(
             trello_client=self,
-            card_id=card_json['id'].encode('utf-8'),
-            name=card_json['name'].encode('utf-8')
+            card_id=card_json['id'],
+            name=card_json['name']
         )
-
 
     def create_checklist(self, checklist_json):
         """
@@ -155,10 +145,9 @@ class Client( object ):
         """
         return Checklist(
             trello_client=self,
-            checklist_id=checklist_json['id'].encode('utf-8'),
-            name=checklist_json['name'].encode('utf-8')
+            checklist_id=checklist_json['id'],
+            name=checklist_json['name']
         )
-
 
     def create_member(self, member_json):
         """
@@ -166,12 +155,12 @@ class Client( object ):
         """
         return Member(
             trello_client=self,
-            member_id=member_json['id'].encode('utf-8'),
-            name=member_json['fullName'].encode('utf-8')
+            member_id=member_json['id'],
+            name=member_json['fullName']
         )
 
-
     # Deprecated method names
+
     def addAuthorisation(self, query_params):
         return self.add_authorisation(query_params)
 

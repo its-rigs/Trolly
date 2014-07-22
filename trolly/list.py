@@ -1,8 +1,8 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 from trolly.trelloobject import TrelloObject
 
@@ -20,7 +20,6 @@ class List(TrelloObject):
 
         self.base_uri = '/lists/' + self.id
 
-
     def getListInformation(self, query_params={}):
         """
         Get information for this list. Returns a dictionary of values.
@@ -30,7 +29,6 @@ class List(TrelloObject):
             query_params=query_params
         )
 
-
     def getBoard(self):
         """
         Get the board that this list belongs to. Returns a Board object.
@@ -38,7 +36,6 @@ class List(TrelloObject):
         board_json = self.getBoardJson(self.base_uri)
 
         return self.createBoard(board_json)
-
 
     def getCards(self):
         """
@@ -52,7 +49,6 @@ class List(TrelloObject):
 
         return cards_list
 
-
     def updateList(self, query_params={}):
         """
         Update information for this list. Returns a new List object.
@@ -65,7 +61,6 @@ class List(TrelloObject):
 
         return self.createList(list_json)
 
-
     def addCard(self, query_params={}):
         """
         Create a card for this list. Returns a Card object.
@@ -77,12 +72,3 @@ class List(TrelloObject):
         )
 
         return self.createCard(card_json)
-
-
-
-
-
-
-
-
-

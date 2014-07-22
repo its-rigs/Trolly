@@ -1,11 +1,10 @@
-'''
+"""
 Created on 8 Nov 2012
 
 @author: plish
-'''
+"""
 
 from __future__ import print_function
-
 from trolly.client import Client
 
 
@@ -16,7 +15,6 @@ class Authorise(Client):
 
     def __init__(self, api_key):
         super(Authorise, self).__init__(api_key)
-
 
     def getAuthorisationUrl(self, application_name, token_expire='1day'):
         """
