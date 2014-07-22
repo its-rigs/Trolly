@@ -110,8 +110,8 @@ class Client( object ):
         """
         return Organisation(
                 trello_client = self,
-                organisation_id = organisation_json['id'].encode('utf-8'),
-                name = organisation_json['name'].encode( 'utf-8' )
+                organisation_id = organisation_json['id'],
+                name = organisation_json['name']
             )
 
 
@@ -121,8 +121,8 @@ class Client( object ):
         """
         return Board(
                 trello_client = self,
-                board_id = board_json['id'].encode('utf-8'),
-                name = board_json['name'].encode( 'utf-8' )
+                board_id = board_json['id'],
+                name = board_json['name']
             )
 
 
@@ -132,8 +132,8 @@ class Client( object ):
         """
         return List(
                 trello_client = self,
-                list_id = list_json['id'].encode('utf-8'),
-                name = list_json['name'].encode( 'utf-8' )
+                list_id = list_json['id'],
+                name = list_json['name']
             )
 
 
@@ -143,8 +143,8 @@ class Client( object ):
         """
         return Card(
                 trello_client = self,
-                card_id = card_json['id'].encode('utf-8'),
-                name = card_json['name'].encode( 'utf-8' )
+                card_id = card_json['id'],
+                name = card_json['name']
             )
 
 
@@ -154,8 +154,8 @@ class Client( object ):
         """
         return Checklist(
                 trello_client = self,
-                checklist_id = checklist_json['id'].encode('utf-8'),
-                name = checklist_json['name'].encode( 'utf-8' )
+                checklist_id = checklist_json['id'],
+                name = checklist_json['name']
             )
 
 
@@ -165,7 +165,7 @@ class Client( object ):
         """
         return Member(
                 trello_client = self,
-                member_id = member_json['id'].encode('utf-8'),
-                name = member_json['fullName'].encode( 'utf-8' )
+                member_id = member_json['id'],
+                name = member_json['fullName']
             )
 
