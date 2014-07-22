@@ -16,7 +16,7 @@ class Authorise(Client):
     def __init__(self, api_key):
         super(Authorise, self).__init__(api_key)
 
-    def getAuthorisationUrl(self, application_name, token_expire='1day'):
+    def get_authorisation_url(self, application_name, token_expire='1day'):
         """
         Returns a URL that needs to be opened in a browser to retrieve an
         access token.
@@ -28,13 +28,16 @@ class Authorise(Client):
             'scope': 'read,write'
         }
 
-        authorisation_url = self.buildUri(
+        authorisation_url = self.build_uri(
             path='/authorize',
-            query_params=self.addAuthorisation(query_params)
+            query_params=self.add_authorisation(query_params)
         )
 
         print('Please go to the following URL and get the user authorisation token:\n', authorisation_url)
         return authorisation_url
+
+    def getAuthorisationUrl(self, application_name, token_expire='1day'):
+        return self.get_authorisation_url(application_name, token_expire)
 
 
 if __name__ == "__main__":
