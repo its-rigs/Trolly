@@ -20,13 +20,13 @@ class TrelloObject(object):
 
         self.client = trello_client
 
-    def fetch_json(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
+    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
         return self.client.fetch_json(
             uri_path=uri_path,
             http_method=http_method,
-            query_params=query_params,
+            query_params=query_params or {},
             body=body,
-            headers=headers,
+            headers=headers or {}
         )
 
     def get_organisations_json(self, base_uri):
@@ -72,8 +72,8 @@ class TrelloObject(object):
         return self.client.create_member(member_json, kwargs)
 
     # Deprecated method names
-    def fetchJson(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
-        return self.fetch_json(uri_path, http_method, query_params, body, headers)
+    def fetchJson(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
+        return self.fetch_json(uri_path, http_method, query_params or {}, body, headers or {})
 
     def getOrganisationsJson(self, base_uri):
         return self.get_organisations_json(base_uri)
