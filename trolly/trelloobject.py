@@ -54,22 +54,22 @@ class TrelloObject(object):
         return self.fetch_json(base_uri + '/members')
 
     def create_organisation(self, organisation_json, **kwargs):
-        return self.client.create_organisation(organisation_json, kwargs)
+        return self.client.create_organisation(organisation_json, **kwargs)
 
     def create_board(self, board_json, **kwargs):
-        return self.client.create_board(board_json, kwargs)
+        return self.client.create_board(board_json, **kwargs)
 
     def create_list(self, list_json, **kwargs):
-        return self.client.create_list(list_json, kwargs)
+        return self.client.create_list(list_json, **kwargs)
 
     def create_card(self, card_json, **kwargs):
-        return self.client.create_card(card_json, kwargs)
+        return self.client.create_card(card_json, **kwargs)
 
     def create_checklist(self, checklist_json, **kwargs):
-        return self.client.create_checklist(checklist_json, kwargs)
+        return self.client.create_checklist(checklist_json, **kwargs)
 
     def create_member(self, member_json, **kwargs):
-        return self.client.create_member(member_json, kwargs)
+        return self.client.create_member(member_json, **kwargs)
 
     # Deprecated method names
     def fetchJson(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
@@ -100,19 +100,19 @@ class TrelloObject(object):
         return self.get_members_json(base_uri)
 
     def createOrganisation(self, organisation_json, **kwargs):
-        return self.create_organisation(organisation_json, kwargs)
+        return self.create_organisation(organisation_json, **kwargs)
 
     def createBoard(self, board_json, **kwargs):
-        return self.create_board(board_json, kwargs)
+        return self.create_board(board_json, **kwargs)
 
     def createList(self, list_json, **kwargs):
-        return self.create_list(list_json, kwargs)
+        return self.create_list(list_json, **kwargs)
 
     def createCard(self, card_json, **kwargs):
-        return self.create_card(card_json, kwargs)
+        return self.create_card(card_json, **kwargs)
 
     def createChecklist(self, checklist_json, **kwargs):
-        return self.create_checklist(checklist_json, kwargs)
+        return self.create_checklist(checklist_json, **kwargs)
 
     def createMember(self, member_json, **kwargs):
-        return self.create_member(member_json, kwargs)
+        return self.create_member(member_json, **kwargs)
