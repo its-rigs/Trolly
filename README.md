@@ -6,12 +6,17 @@ includes a basic set of methods based on general use cases. This library was bas
 [sarumont](https://github.com/sarumont/py-trello). Very little was kept from this code, but still props on the initial 
 work.
 
+# Changes
+## 0.2
+Trolly has recently been updated to start the deprecation of non-pythonic conventions and improve PEP8 compliance.
+All the old pascal cased methods are now deprecated, they have been left in and point to the new method names. There
+are no breaking changes in this release but it is recommended you change your code to use the pythonic naming conventions.
 
 ## Getting Started
 
 ### Dependencies
 
-This library requires python 2.5 and above.
+This library requires python 2.5+ or 3+.
 
 Before getting stated with this library you will need a few extra things:
 - [httplib2](http://code.google.com/p/httplib2/)
@@ -19,7 +24,7 @@ Before getting stated with this library you will need a few extra things:
 - User authorisation token ( see below for how to obtain )
 
 ### Installation
-To install either download the source and run:
+To install for python 2 or 3 you can either download the source and run:
     
     sudo python setup.py install
 
