@@ -100,7 +100,7 @@ class Client(object):
 
         self.check_errors(uri, response)
 
-        return json.loads(content.decode())
+        return json.loads(content.decode('utf-8'))
 
     def create_organisation(self, organisation_json):
         """

@@ -41,7 +41,7 @@ class TrelloTests(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_org_01_getBoardInfo(self):
+    def test_org_01_getOrgInfo(self):
         result = self.org.get_organisation_information()
         self.assertIsNotNone(result, 'JSON was empty')
 
