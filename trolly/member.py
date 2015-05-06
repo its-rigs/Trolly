@@ -53,6 +53,17 @@ class Member(TrelloObject):
 
         return cards_list
 
+    def create_new_board(self, query_params=None):
+        """
+        Create a new board. name is required in query_params. Returns a Board object.
+        """
+        board_json = self.fetch_json(
+            uri_path='/boards',
+            http_method='POST',
+            query_params=query_params or {}
+        )
+        return self.create_board(board_json)
+
     # Deprecated
     def getMemberInformation(self, query_params=None):
         return self.get_member_information(query_params)
@@ -62,3 +73,6 @@ class Member(TrelloObject):
 
     def getCards(self):
         return self.get_cards()
+
+    def createNewBoard(self, query_params=None):
+        return self.create_new_board(query_params)
