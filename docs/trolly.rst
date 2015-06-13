@@ -44,6 +44,14 @@ trolly.client module
     :undoc-members:
     :show-inheritance:
 
+trolly.exceptions module
+------------------------
+
+.. automodule:: trolly.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 trolly.list module
 ------------------
 
