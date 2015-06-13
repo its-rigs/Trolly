@@ -161,38 +161,3 @@ class Client(object):
             member_id=member_json['id'],
             name=member_json['fullName']
         )
-
-    # Deprecated method names
-
-    def addAuthorisation(self, query_params):
-        return self.add_authorisation(query_params)
-
-    def cleanPath(self, path):
-        return self.clean_path(path)
-
-    def checkErrors(self, uri, response):
-        self.check_errors(uri, response)
-
-    def buildUri(self, path, query_params):
-        return self.build_uri(path, query_params)
-
-    def fetchJson(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
-        return self.fetch_json(uri_path, http_method, query_params, body, headers)
-
-    def createOrganisation(self, organisation_json):
-        return self.create_organisation(organisation_json)
-
-    def createBoard(self, board_json):
-        return self.create_board(board_json)
-
-    def createList(self, list_json):
-        return self.create_list(list_json)
-
-    def createCard(self, card_json):
-        return self.create_card(card_json)
-
-    def createChecklist(self, checklist_json):
-        return self.create_checklist(checklist_json)
-
-    def createMember(self, member_json):
-        return self.create_member(member_json)
