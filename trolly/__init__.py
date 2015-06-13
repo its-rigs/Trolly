@@ -4,30 +4,28 @@ Created on 8 Nov 2012
 @author: plish
 """
 
+__all__ = [
+    'authorise',
+    'board',
+    'card',
+    'checklist',
+    'client',
+    'list',
+    'member',
+    'organisation',
+    'trelloobject',
+    'ResourceUnavailable',
+    'Unauthorised',
+]
 
-class ResourceUnavailable(Exception):
-    """
-    Exception representing a failed request to a resource
-    """
 
-    def __init__(self, message, http_response):
-        super(ResourceUnavailable, self).__init__()
-        self.message = message
-        self.status = http_response.status
-
-    def __str__(self):
-        return "Resource unavailable: %s (HTTP status: %s)" % (self.message, self.status)
-
-
-class Unauthorised(Exception):
-    """
-    This is raised if you don't have access to the requested object
-    """
-
-    def __init__(self, message, http_response):
-        super(Unauthorised, self).__init__()
-        self.message = message
-        self.status = http_response.status
-
-    def __str__(self):
-        return "Unauthorised access to resource: %s (HTTP status: %s)" % (self.message, self.status)
+from .exceptions import ResourceUnavailable, Unauthorised
+from . import authorise
+from . import board
+from . import card
+from . import checklist
+from . import client
+from . import list
+from . import member
+from . import organisation
+from . import trelloobject
