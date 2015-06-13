@@ -29,6 +29,7 @@ member_id = ''
 
 
 class TrelloTests(unittest.TestCase):
+
     def setUp(self):
         self.client = Client(api_key, user_auth_token)
         self.org = Organisation(self.client, organisation)
@@ -58,9 +59,12 @@ class TrelloTests(unittest.TestCase):
     def test_org_04_updateOrganisation(self):
         description = str(uuid.uuid1())
         new_organisation = self.org.update_organisation({'desc': description})
-        new_description = new_organisation.get_organisation_information()['desc']
+        new_description = new_organisation.get_organisation_information()[
+            'desc']
 
-        self.assertEqual(description, new_description, msg="Descriptions don't match. Update Organisation didn't work!")
+        self.assertEqual(
+            description, new_description,
+            msg="Descriptions don't match. Update Organisation didn't work!")
 
     def test_boa_01_getBoardInformation(self):
         result = self.board.get_board_information()
@@ -89,21 +93,26 @@ class TrelloTests(unittest.TestCase):
     def test_boa_06_getOrganisation(self):
         organisation = self.board.get_organisation()
         self.assertIsNotNone(organisation.id, msg="ID has not been provided")
-        self.assertIsNotNone(organisation.name, msg="Name has not been provided")
+        self.assertIsNotNone(
+            organisation.name, msg="Name has not been provided")
 
     def test_boa_07_updateBoard(self):
         description = str(uuid.uuid1())
         new_board = self.board.update_board({'desc': description})
         new_description = new_board.get_board_information()['desc']
 
-        self.assertEqual(description, new_description, msg="Descriptions don't match. Update Board didn't work!")
+        self.assertEqual(
+            description, new_description,
+            msg="Descriptions don't match. Update Board didn't work!")
 
     def test_boa_08_addList(self):
         name = str(uuid.uuid1())
         new_list = self.board.add_list({'name': name})
         new_list_name = new_list.name
 
-        self.assertEqual(name, new_list_name, msg="Names don't match. Add list didn't work!")
+        self.assertEqual(
+            name, new_list_name,
+            msg="Names don't match. Add list didn't work!")
 
     def test_lis_01_getListInformation(self):
         result = self.list.get_list_information()
@@ -124,14 +133,18 @@ class TrelloTests(unittest.TestCase):
         new_list = self.list.update_list({'name': name})
         new_list_name = new_list.name
 
-        self.assertEqual(name, new_list_name, msg="Names don't match. Update list didn't work!")
+        self.assertEqual(
+            name, new_list_name,
+            msg="Names don't match. Update list didn't work!")
 
     def test_lis_05_addCard(self):
         name = str(uuid.uuid1())
         new_card = self.list.add_card({'name': name})
         new_card_name = new_card.name
 
-        self.assertEqual(name, new_card_name, msg="Names don't match. Add card didn't work!")
+        self.assertEqual(
+            name, new_card_name,
+            msg="Names don't match. Add card didn't work!")
 
     def test_car_01_getCardInformation(self):
         result = self.card.get_card_information()
@@ -150,7 +163,8 @@ class TrelloTests(unittest.TestCase):
     def test_car_04_getChecklists(self):
         for checklist in self.card.get_checklists():
             self.assertIsNotNone(checklist.id, msg="ID has not been provided")
-            self.assertIsNotNone(checklist.name, msg="Name has not been provided")
+            self.assertIsNotNone(
+                checklist.name, msg="Name has not been provided")
 
     def test_car_05_getMembers(self):
         for member in self.card.get_members():
@@ -162,26 +176,33 @@ class TrelloTests(unittest.TestCase):
         new_card = self.card.update_card({'desc': description})
         new_description = new_card.getCardInformation()['desc']
 
-        self.assertEqual(description, new_description, msg="Descriptions don't match. Update Card didn't work!")
+        self.assertEqual(
+            description, new_description,
+            msg="Descriptions don't match. Update Card didn't work!")
 
     def test_car_07_addComments(self):
         comment = str(uuid.uuid1())
         result = self.card.add_comments(comment)
         new_comment = result['data']['text']
 
-        self.assertEqual(comment, new_comment, msg="Comments don't match. Add comment didn't work!")
+        self.assertEqual(
+            comment, new_comment,
+            msg="Comments don't match. Add comment didn't work!")
 
     def test_car_08_addAttachment(self):
         f = open('test/test.txt', 'r').read()
         result = self.card.add_attachment('text.txt', f)
-        self.assertIsNotNone(result, "Got nothing back, doesn't look like it worked!")
+        self.assertIsNotNone(
+            result, "Got nothing back, doesn't look like it worked!")
 
     def test_car_09_addChecklists(self):
         name = str(uuid.uuid1())
         new_checklist = self.card.add_checklists({'name': name})
         new_checklist_name = new_checklist.name
 
-        self.assertEqual(name, new_checklist_name, "Names don't match. Add Checklist failed!")
+        self.assertEqual(
+            name, new_checklist_name,
+            "Names don't match. Add Checklist failed!")
 
     def test_car_10_addLabels(self):
         try:
@@ -199,7 +220,6 @@ class TrelloTests(unittest.TestCase):
         except ResourceUnavailable:
             # Label already added
             pass
-
 
     def test_car_11_addMember(self):
 
@@ -226,7 +246,8 @@ class TrelloTests(unittest.TestCase):
             self.assertIsNotNone(result, "JSON failure! Nothing was returned")
 
             for member in result:
-                self.assertNotEqual(member['id'], member_id, "Member was not removed!")
+                self.assertNotEqual(
+                    member['id'], member_id, "Member was not removed!")
 
         except ResourceUnavailable:
             # Member isn't attached to card
@@ -245,14 +266,16 @@ class TrelloTests(unittest.TestCase):
         new_checklist = self.checklist.update_checklist(name)
         new_name = new_checklist.name
 
-        self.assertEqual(name, new_name, msg="Names don't match. Update didn't work!")
+        self.assertEqual(
+            name, new_name, msg="Names don't match. Update didn't work!")
 
     def test_che_04_addItem(self):
         name = str(uuid.uuid1())
         result = self.checklist.add_item({'name': name})
         new_item_name = result['name']
 
-        self.assertEqual(name, new_item_name, "Names don't match! Add item failed")
+        self.assertEqual(
+            name, new_item_name, "Names don't match! Add item failed")
 
     def test_che_05_removeItem(self):
         items = self.checklist.get_items()
@@ -279,8 +302,3 @@ class TrelloTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-

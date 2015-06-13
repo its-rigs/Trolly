@@ -55,7 +55,7 @@ class Organisation(TrelloObject):
         """
         Update this organisations information. Returns a new organisation object.
         """
-        organisation_json = self.fetchJson(
+        organisation_json = self.fetch_json(
             uri_path=self.base_uri,
             http_method='PUT',
             query_params=query_params or {}
