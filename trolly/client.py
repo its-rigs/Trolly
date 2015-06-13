@@ -1,9 +1,3 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 import json
 from httplib2 import Http
 
@@ -23,6 +17,7 @@ from trolly import Unauthorised, ResourceUnavailable
 
 
 class Client(object):
+
     """
     A class that has all the logic for communicating with Trello and returning
     information to the user
@@ -76,7 +71,8 @@ class Client(object):
 
         return url
 
-    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
+    def fetch_json(self, uri_path, http_method='GET', query_params=None,
+                   body=None, headers=None):
         """
         Make a call to Trello API and capture JSON response. Raises an error
         when it fails.
@@ -87,7 +83,8 @@ class Client(object):
         query_params = self.add_authorisation(query_params)
         uri = self.build_uri(uri_path, query_params)
 
-        if http_method in ("POST", "PUT", "DELETE") and 'Content-Type' not in headers:
+        allowed_methods = ("POST", "PUT", "DELETE")
+        if http_method in allowed_methods and 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
 
         headers['Accept'] = 'application/json'

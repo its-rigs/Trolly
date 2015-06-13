@@ -1,15 +1,10 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 import mimetypes
 
 from trolly.trelloobject import TrelloObject
 
 
 class Card(TrelloObject):
+
     """
     Class representing a Trello Card
     """
@@ -60,7 +55,8 @@ class Card(TrelloObject):
 
     def get_members(self):
         """
-        Get all members attached to this card. Returns a list of Member objects.
+        Get all members attached to this card. Returns a list of Member
+        objects.
         """
         members = self.get_members_json(self.base_uri)
 
@@ -164,8 +160,8 @@ class Card(TrelloObject):
     def encode_multipart_formdata(self, fields, filename, file_values):
         """
         Encodes data to updload a file to Trello.
-        Fields is a dictionary of api_key and token. Filename is the name of the
-        file and file_values is the open(file).read() string.
+        Fields is a dictionary of api_key and token. Filename is the name of
+        the file and file_values is the open(file).read() string.
         """
         boundary = '----------Trello_Boundary_$'
         crlf = '\r\n'
@@ -179,7 +175,9 @@ class Card(TrelloObject):
             data.append(fields[key])
 
         data.append('--' + boundary)
-        data.append('Content-Disposition: form-data; name="file"; filename="%s"' % filename)
+        data.append(
+            'Content-Disposition: form-data; name="file"; filename="%s"' %
+            filename)
         data.append('Content-Type: %s' % self.get_content_type(filename))
         data.append('')
         data.append(file_values)
@@ -197,4 +195,3 @@ class Card(TrelloObject):
 
     def get_content_type(self, filename):
         return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
-

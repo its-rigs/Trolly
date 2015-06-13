@@ -1,11 +1,6 @@
-"""
-Created on 9 Nov 2012
-
-@author: plish
-"""
-
 
 class TrelloObject(object):
+
     """
     This class is a base object that should be used by all trello objects;
     Board, List, Card, etc. It contains methods needed and used by all those
@@ -20,7 +15,8 @@ class TrelloObject(object):
 
         self.client = trello_client
 
-    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
+    def fetch_json(self, uri_path, http_method='GET', query_params=None,
+                   body=None, headers=None):
         return self.client.fetch_json(
             uri_path=uri_path,
             http_method=http_method,
@@ -70,4 +66,3 @@ class TrelloObject(object):
 
     def create_member(self, member_json, **kwargs):
         return self.client.create_member(member_json, **kwargs)
-

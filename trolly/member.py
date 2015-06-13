@@ -1,13 +1,8 @@
-"""
-Created on 9 Nov 2012
-
-@author: plish
-"""
-
 from trolly.trelloobject import TrelloObject
 
 
 class Member(TrelloObject):
+
     """
     Class representing a Trello Member
     """
@@ -31,7 +26,8 @@ class Member(TrelloObject):
 
     def get_boards(self):
         """
-        Get all boards this member is attached to. Returns a list of Board objects.
+        Get all boards this member is attached to. Returns a list of Board
+        objects.
         """
         boards = self.get_boards_json(self.base_uri)
 
@@ -43,7 +39,8 @@ class Member(TrelloObject):
 
     def get_cards(self):
         """
-        Get all cards this member is attached to. Return a list of Card objects.
+        Get all cards this member is attached to. Return a list of Card
+        objects.
         """
         cards = self.get_cards_json(self.base_uri)
 
@@ -55,7 +52,8 @@ class Member(TrelloObject):
 
     def create_new_board(self, query_params=None):
         """
-        Create a new board. name is required in query_params. Returns a Board object.
+        Create a new board. name is required in query_params. Returns a Board
+        object.
         """
         board_json = self.fetch_json(
             uri_path='/boards',
@@ -63,4 +61,3 @@ class Member(TrelloObject):
             query_params=query_params or {}
         )
         return self.create_board(board_json)
-

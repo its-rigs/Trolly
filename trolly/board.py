@@ -1,13 +1,8 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 from trolly.trelloobject import TrelloObject
 
 
 class Board(TrelloObject):
+
     """
     Class representing a Trello Board
     """

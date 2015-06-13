@@ -1,13 +1,8 @@
-"""
-Created on 13 Nov 2012
-
-@author: plish
-"""
-
 from trolly.trelloobject import TrelloObject
 
 
 class Checklist(TrelloObject):
+
     """
     Class representing a Trello Checklist
     """
@@ -53,7 +48,8 @@ class Checklist(TrelloObject):
 
     def add_item(self, query_params=None):
         """
-        Add an item to this checklist. Returns a dictionary of values of new item.
+        Add an item to this checklist. Returns a dictionary of values of new
+        item.
         """
         return self.fetch_json(
             uri_path=self.base_uri + '/checkItems',
@@ -69,4 +65,3 @@ class Checklist(TrelloObject):
             uri_path=self.base_uri + '/checkItems/' + item_id,
             http_method='DELETE'
         )
-

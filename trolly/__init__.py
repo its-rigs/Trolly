@@ -1,9 +1,3 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 __all__ = [
     'authorise',
     'board',

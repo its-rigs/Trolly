@@ -1,13 +1,8 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 from trolly.trelloobject import TrelloObject
 
 
 class List(TrelloObject):
+
     """
     Class representing a Trello List
     """
@@ -71,4 +66,3 @@ class List(TrelloObject):
         )
 
         return self.create_card(card_json)
-

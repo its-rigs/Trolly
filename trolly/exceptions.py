@@ -1,5 +1,6 @@
 
 class ResourceUnavailable(Exception):
+
     """
     Exception representing a failed request to a resource
     """
@@ -15,6 +16,7 @@ class ResourceUnavailable(Exception):
 
 
 class Unauthorised(Exception):
+
     """
     This is raised if you don't have access to the requested object
     """
@@ -27,4 +29,3 @@ class Unauthorised(Exception):
     def __str__(self):
         return "Unauthorised access to resource: %s (HTTP status: %s)" % (
             self.message, self.status)
-

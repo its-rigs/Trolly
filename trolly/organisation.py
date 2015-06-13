@@ -1,9 +1,3 @@
-"""
-Created on 14 Nov 2012
-
-@author: plish
-"""
-
 from trolly.trelloobject import TrelloObject
 
 
@@ -53,7 +47,8 @@ class Organisation(TrelloObject):
 
     def update_organisation(self, query_params=None):
         """
-        Update this organisations information. Returns a new organisation object.
+        Update this organisations information. Returns a new organisation
+        object.
         """
         organisation_json = self.fetch_json(
             uri_path=self.base_uri,
@@ -102,4 +97,3 @@ class Organisation(TrelloObject):
                 'type': membership_type
             }
         )
-
