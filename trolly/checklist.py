@@ -70,18 +70,3 @@ class Checklist(TrelloObject):
             http_method='DELETE'
         )
 
-    # Deprecated
-    def getChecklistInformation(self, query_params=None):
-        return self.get_checklist_information(query_params)
-
-    def getItems(self, query_params=None):
-        return self.get_items(query_params)
-
-    def updateChecklist(self, name):
-        return self.update_checklist(name)
-
-    def addItem(self, query_params=None):
-        return self.add_item(query_params)
-
-    def removeItem(self, item_id):
-        return self.remove_item(item_id)

@@ -64,15 +64,3 @@ class Member(TrelloObject):
         )
         return self.create_board(board_json)
 
-    # Deprecated
-    def getMemberInformation(self, query_params=None):
-        return self.get_member_information(query_params)
-
-    def getBoards(self):
-        return self.get_boards()
-
-    def getCards(self):
-        return self.get_cards()
-
-    def createNewBoard(self, query_params=None):
-        return self.create_new_board(query_params)

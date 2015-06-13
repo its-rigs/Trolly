@@ -103,24 +103,3 @@ class Organisation(TrelloObject):
             }
         )
 
-    # Deprecated methods
-    def getOrganisationInformation(self, query_params=None):
-        return self.get_organisation_information(query_params)
-
-    def getBoards(self):
-        return self.get_boards()
-
-    def getMembers(self):
-        return self.get_members()
-
-    def updateOrganisation(self, query_params=None):
-        return self.update_organisation(query_params)
-
-    def removeMember(self, member_id):
-        return self.remove_member(member_id)
-
-    def addMemberById(self, member_id, membership_type='normal'):
-        return self.add_member_by_id(member_id, membership_type)
-
-    def addMember(self, email, fullname, membership_type='normal'):
-        return self.add_member(email, fullname, membership_type)

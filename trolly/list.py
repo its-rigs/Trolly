@@ -72,18 +72,3 @@ class List(TrelloObject):
 
         return self.create_card(card_json)
 
-    # Deprecated
-    def getListInformation(self, query_params=None):
-        return self.get_list_information(query_params)
-
-    def getBoard(self):
-        return self.get_board()
-
-    def getCards(self):
-        return self.get_cards()
-
-    def updateList(self, query_params=None):
-        return self.update_list(query_params)
-
-    def addCard(self, query_params=None):
-        return self.add_card(query_params)

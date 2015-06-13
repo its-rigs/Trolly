@@ -146,37 +146,3 @@ class Board(TrelloObject):
             uri_path=self.base_uri + '/members/%s' % member_id,
             http_method='DELETE'
         )
-
-    # Deprecated
-    def getBoardInformation(self, query_params=None):
-        return self.get_board_information(query_params)
-
-    def getLists(self):
-        return self.get_lists()
-
-    def getCards(self):
-        return self.get_cards()
-
-    def getCard(self, card_id):
-        return self.get_card(card_id)
-
-    def getMembers(self):
-        return self.get_members()
-
-    def getOrganisation(self):
-        return self.get_organisation()
-
-    def updateBoard(self, query_params=None):
-        return self.update_board(query_params)
-
-    def addList(self, query_params=None):
-        return self.add_list(query_params)
-
-    def addMemberById(self, member_id, membership_type='normal'):
-        return self.add_member_by_id(member_id, membership_type)
-
-    def addMember(self, email, fullname, membership_type='normal'):
-        return self.add_member(email, fullname, membership_type)
-
-    def removeMember(self, member_id):
-        return self.remove_member(member_id)
