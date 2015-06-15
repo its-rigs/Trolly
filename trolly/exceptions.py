@@ -1,9 +1,9 @@
 
 class ResourceUnavailable(Exception):
 
-    """
+    '''
     Exception representing a failed request to a resource
-    """
+    '''
 
     def __init__(self, message, http_response):
         super(ResourceUnavailable, self).__init__()
@@ -17,9 +17,9 @@ class ResourceUnavailable(Exception):
 
 class Unauthorised(Exception):
 
-    """
+    '''
     This is raised if you don't have access to the requested object
-    """
+    '''
 
     def __init__(self, message, http_response):
         super(Unauthorised, self).__init__()

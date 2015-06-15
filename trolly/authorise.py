@@ -1,21 +1,21 @@
 from __future__ import print_function
-from trolly.client import Client
+import trolly
 
 
-class Authorise(Client):
+class Authorise(trolly.Client):
 
-    """
+    '''
     Class for helping get user auth token.
-    """
+    '''
 
     def __init__(self, api_key):
         super(Authorise, self).__init__(api_key)
 
     def get_authorisation_url(self, application_name, token_expire='1day'):
-        """
+        '''
         Returns a URL that needs to be opened in a browser to retrieve an
         access token.
-        """
+        '''
         query_params = {
             'name': application_name,
             'expiration': token_expire,

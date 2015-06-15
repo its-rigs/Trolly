@@ -1,25 +1,22 @@
 __all__ = [
-    'authorise',
-    'board',
-    'card',
-    'checklist',
-    'client',
-    'list',
-    'member',
-    'organisation',
-    'trelloobject',
+    'Board',
+    'Card',
+    'Checklist',
+    'Client',
+    'List',
+    'Member',
+    'Organisation',
     'ResourceUnavailable',
     'Unauthorised',
 ]
 
+from .board import Board
+from .card import Card
+from .checklist import Checklist
+from .client import Client
+from .exceptions import ResourceUnavailable
+from .exceptions import Unauthorised
+from .list import List
+from .member import Member
+from .organisation import Organisation
 
-from .exceptions import ResourceUnavailable, Unauthorised
-from . import authorise
-from . import board
-from . import card
-from . import checklist
-from . import client
-from . import list
-from . import member
-from . import organisation
-from . import trelloobject
