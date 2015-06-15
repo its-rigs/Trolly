@@ -173,15 +173,60 @@ class Client(object):
             name=member_json['fullName']
         )
 
-    def get_member(self, member_id='me'):
+    def get_organisation(self, id, name=None):
         '''
-        Get a member or your current member if `member_id` wasn't given.
+        Get an organisation
 
         Returns:
-            Member: The member with the given `member_id`, defaults to the
+            Organisation: The organisation with the given `id`
+        '''
+        return self.create_organisation(dict(id=id, name=name))
+
+    def get_board(self, id, name=None):
+        '''
+        Get a board
+
+        Returns:
+            Board: The board with the given `id`
+        '''
+        return self.create_board(dict(id=id, name=name))
+
+    def get_list(self, id, name=None):
+        '''
+        Get a list
+
+        Returns:
+            List: The list with the given `id`
+        '''
+        return self.create_list(dict(id=id, name=name))
+
+    def get_card(self, id, name=None):
+        '''
+        Get a card
+
+        Returns:
+            Card: The card with the given `id`
+        '''
+        return self.create_card(dict(id=id, name=name))
+
+    def get_checklist(self, id, name=None):
+        '''
+        Get a checklist
+
+        Returns:
+            Checklist: The checklist with the given `id`
+        '''
+        return self.create_checklist(dict(id=id, name=name))
+
+    def get_member(self, id='me', name=None):
+        '''
+        Get a member or your current member if `id` wasn't given.
+
+        Returns:
+            Member: The member with the given `id`, defaults to the
             logged in member.
         '''
-        return trolly.member.Member(trello_client=self, member_id=member_id)
+        return self.create_member(dict(id=id, fullName=name))
 
     # Shortcut methods from the current member
     def get_boards(self):
