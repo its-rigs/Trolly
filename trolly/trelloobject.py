@@ -1,4 +1,4 @@
-import trolly
+
 
 class TrelloObject(object):
 
