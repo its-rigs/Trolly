@@ -1,16 +1,11 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
-from trolly.trelloobject import TrelloObject
+from . import trelloobject
 
 
-class Board(TrelloObject):
-    """
+class Board(trelloobject.TrelloObject):
+
+    '''
     Class representing a Trello Board
-    """
+    '''
 
     def __init__(self, trello_client, board_id, name=''):
         super(Board, self).__init__(trello_client)
@@ -21,18 +16,21 @@ class Board(TrelloObject):
         self.base_uri = '/boards/' + self.id
 
     def get_board_information(self, query_params=None):
-        """
+        '''
         Get all information for this board. Returns a dictionary of values.
-        """
+        '''
         return self.fetch_json(
             uri_path='/boards/' + self.id,
             query_params=query_params or {}
         )
 
     def get_lists(self):
-        """
+        '''
         Get the lists attached to this board. Returns a list of List objects.
-        """
+
+        Returns:
+            list(List): The lists attached to this board
+        '''
         lists = self.get_lists_json(self.base_uri)
 
         lists_list = []
@@ -42,9 +40,12 @@ class Board(TrelloObject):
         return lists_list
 
     def get_cards(self):
-        """
+        '''
         Get the cards for this board. Returns a list of Card objects.
-        """
+
+        Returns:
+            list(Card): The cards attached to this board
+        '''
         cards = self.get_cards_json(self.base_uri)
 
         cards_list = []
@@ -54,9 +55,12 @@ class Board(TrelloObject):
         return cards_list
 
     def get_card(self, card_id):
-        """
+        '''
         Get a Card for a given card id. Returns a Card object.
-        """
+
+        Returns:
+            Card: The card with the given card_id
+        '''
         card_json = self.fetch_json(
             uri_path=self.base_uri + '/cards/' + card_id
         )
@@ -64,9 +68,12 @@ class Board(TrelloObject):
         return self.create_card(card_json)
 
     def get_members(self):
-        """
+        '''
         Get Members attached to this board. Returns a list of Member objects.
-        """
+
+        Returns:
+            list(Member): The members attached to this board
+        '''
         members = self.get_members_json(self.base_uri)
 
         members_list = []
@@ -76,17 +83,20 @@ class Board(TrelloObject):
         return members_list
 
     def get_organisation(self):
-        """
+        '''
         Get the Organisation for this board. Returns Organisation object.
-        """
+
+        Returns:
+            list(Organisation): The organisation attached to this board
+        '''
         organisation_json = self.get_organisations_json(self.base_uri)
 
         return self.create_organisation(organisation_json)
 
     def update_board(self, query_params=None):
-        """
+        '''
         Update this board's information. Returns a new board.
-        """
+        '''
         board_json = self.fetch_json(
             uri_path=self.base_uri,
             http_method='PUT',
@@ -96,10 +106,10 @@ class Board(TrelloObject):
         return self.create_board(board_json)
 
     def add_list(self, query_params=None):
-        """
+        '''
         Create a list for a board. Returns a new List object.
-        """
-        list_json = self.fetchJson(
+        '''
+        list_json = self.fetch_json(
             uri_path=self.base_uri + '/lists',
             http_method='POST',
             query_params=query_params or {}
@@ -108,11 +118,11 @@ class Board(TrelloObject):
         return self.create_list(list_json)
 
     def add_member_by_id(self, member_id, membership_type='normal'):
-        """
+        '''
         Add a member to the board using the id. Membership type can be
         normal or admin. Returns JSON of all members if successful or raises an
         Unauthorised exception if not.
-        """
+        '''
         return self.fetch_json(
             uri_path=self.base_uri + '/members/%s' % member_id,
             http_method='PUT',
@@ -122,11 +132,11 @@ class Board(TrelloObject):
         )
 
     def add_member(self, email, fullname, membership_type='normal'):
-        """
+        '''
         Add a member to the board. Membership type can be normal or admin.
         Returns JSON of all members if successful or raises an Unauthorised
         exception if not.
-        """
+        '''
         return self.fetch_json(
             uri_path=self.base_uri + '/members',
             http_method='PUT',
@@ -138,45 +148,11 @@ class Board(TrelloObject):
         )
 
     def remove_member(self, member_id):
-        """
+        '''
         Remove a member from the organisation.Returns JSON of all members if
         successful or raises an Unauthorised exception if not.
-        """
+        '''
         return self.fetch_json(
             uri_path=self.base_uri + '/members/%s' % member_id,
             http_method='DELETE'
         )
-
-    # Deprecated
-    def getBoardInformation(self, query_params=None):
-        return self.get_board_information(query_params)
-
-    def getLists(self):
-        return self.get_lists()
-
-    def getCards(self):
-        return self.get_cards()
-
-    def getCard(self, card_id):
-        return self.get_card(card_id)
-
-    def getMembers(self):
-        return self.get_members()
-
-    def getOrganisation(self):
-        return self.get_organisation()
-
-    def updateBoard(self, query_params=None):
-        return self.update_board(query_params)
-
-    def addList(self, query_params=None):
-        return self.add_list(query_params)
-
-    def addMemberById(self, member_id, membership_type='normal'):
-        return self.add_member_by_id(member_id, membership_type)
-
-    def addMember(self, email, fullname, membership_type='normal'):
-        return self.add_member(email, fullname, membership_type)
-
-    def removeMember(self, member_id):
-        return self.remove_member(member_id)

@@ -1,26 +1,21 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 from __future__ import print_function
-from trolly.client import Client
+import trolly
 
 
-class Authorise(Client):
-    """
+class Authorise(trolly.Client):
+
+    '''
     Class for helping get user auth token.
-    """
+    '''
 
     def __init__(self, api_key):
         super(Authorise, self).__init__(api_key)
 
     def get_authorisation_url(self, application_name, token_expire='1day'):
-        """
+        '''
         Returns a URL that needs to be opened in a browser to retrieve an
         access token.
-        """
+        '''
         query_params = {
             'name': application_name,
             'expiration': token_expire,
@@ -33,7 +28,8 @@ class Authorise(Client):
             query_params=self.add_authorisation(query_params)
         )
 
-        print('Please go to the following URL and get the user authorisation token:\n', authorisation_url)
+        print('Please go to the following URL and get the user authorisation '
+              'token:\n', authorisation_url)
         return authorisation_url
 
     def getAuthorisationUrl(self, application_name, token_expire='1day'):
@@ -60,7 +56,7 @@ if __name__ == "__main__":
     except:
         pass
 
-    if option in ( '-h', '--h', '-help' ):
+    if option in ('-h', '--h', '-help'):
         print('\n%s \n\t%s \n\t%s \n\t%s\n\n' % (
             'Use the -a option to get the authorisation URL.',
             'First argument API key.',

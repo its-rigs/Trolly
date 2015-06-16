@@ -1,47 +1,35 @@
-"""
-Created on 8 Nov 2012
-
-@author: plish
-"""
-
 import json
-from httplib2 import Http
+import httplib2
 
 try:
     from urllib import urlencode
 except ImportError:
     from urllib.parse import urlencode
 
-from trolly.organisation import Organisation
-from trolly.board import Board
-from trolly.list import List
-from trolly.card import Card
-from trolly.checklist import Checklist
-from trolly.member import Member
-
-from trolly import Unauthorised, ResourceUnavailable
+import trolly
 
 
 class Client(object):
-    """
+
+    '''
     A class that has all the logic for communicating with Trello and returning
     information to the user
-    """
+    '''
 
     def __init__(self, api_key, user_auth_token=None):
-        """
+        '''
         Takes the API key and User Auth Token, which are needed for all Trello
         API calls to allow access to requested information
-        """
+        '''
         self.api_key = api_key
         self.user_auth_token = user_auth_token
 
-        self.client = Http()
+        self.client = httplib2.Http()
 
     def add_authorisation(self, query_params):
-        """
+        '''
         Adds the API key and user auth token to the query parameters
-        """
+        '''
         query_params['key'] = self.api_key
 
         if self.user_auth_token:
@@ -50,44 +38,49 @@ class Client(object):
         return query_params
 
     def clean_path(self, path):
-        """
+        '''
         Ensure the path has a preceding /
-        """
+        '''
         if path[0] != '/':
             path = '/' + path
         return path
 
     def check_errors(self, uri, response):
-        """
+        '''
         Check HTTP reponse for known errors
-        """
+        '''
         if response.status == 401:
-            raise Unauthorised(uri, response)
+            raise trolly.Unauthorised(uri, response)
 
         if response.status != 200:
-            raise ResourceUnavailable(uri, response)
+            raise trolly.ResourceUnavailable(uri, response)
 
     def build_uri(self, path, query_params):
-        """
+        '''
         Build the URI for the API call.
-        """
-        url = 'https://api.trello.com/1' + self.cleanPath(path)
+        '''
+        url = 'https://api.trello.com/1' + self.clean_path(path)
         url += '?' + urlencode(query_params)
 
         return url
 
-    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
-        """
+    def fetch_json(self, uri_path, http_method='GET', query_params=None,
+                   body=None, headers=None):
+        '''
         Make a call to Trello API and capture JSON response. Raises an error
         when it fails.
-        """
+
+        Returns:
+            dict: Dictionary with the JSON data
+        '''
         query_params = query_params or {}
         headers = headers or {}
 
         query_params = self.add_authorisation(query_params)
         uri = self.build_uri(uri_path, query_params)
 
-        if http_method in ("POST", "PUT", "DELETE") and 'Content-Type' not in headers:
+        allowed_methods = ("POST", "PUT", "DELETE")
+        if http_method in allowed_methods and 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
 
         headers['Accept'] = 'application/json'
@@ -103,96 +96,167 @@ class Client(object):
         return json.loads(content.decode('utf-8'))
 
     def create_organisation(self, organisation_json):
-        """
+        '''
         Create an Organisation object from a JSON object
-        """
-        return Organisation(
+
+        Returns:
+            Organisation: The organisation from the given `organisation_json`.
+        '''
+        return trolly.organisation.Organisation(
             trello_client=self,
             organisation_id=organisation_json['id'],
             name=organisation_json['name']
         )
 
     def create_board(self, board_json):
-        """
+        '''
         Create Board object from a JSON object
-        """
-        return Board(
+
+        Returns:
+            Board: The board from the given `board_json`.
+        '''
+        return trolly.board.Board(
             trello_client=self,
             board_id=board_json['id'],
             name=board_json['name']
         )
 
     def create_list(self, list_json):
-        """
+        '''
         Create List object from JSON object
-        """
-        return List(
+
+        Returns:
+            List: The list from the given `list_json`.
+        '''
+        return trolly.list.List(
             trello_client=self,
             list_id=list_json['id'],
             name=list_json['name']
         )
 
     def create_card(self, card_json):
-        """
+        '''
         Create a Card object from JSON object
-        """
-        return Card(
+
+        Returns:
+            Card: The card from the given `card_json`.
+        '''
+        return trolly.card.Card(
             trello_client=self,
             card_id=card_json['id'],
             name=card_json['name']
         )
 
     def create_checklist(self, checklist_json):
-        """
+        '''
         Create a Checklist object from JSON object
-        """
-        return Checklist(
+
+        Returns:
+            Checklist: The checklist from the given `checklist_json`.
+        '''
+        return trolly.checklist.Checklist(
             trello_client=self,
             checklist_id=checklist_json['id'],
             name=checklist_json['name']
         )
 
     def create_member(self, member_json):
-        """
+        '''
         Create a Member object from JSON object
-        """
-        return Member(
+
+        Returns:
+            Member: The member from the given `member_json`.
+        '''
+        return trolly.member.Member(
             trello_client=self,
             member_id=member_json['id'],
             name=member_json['fullName']
         )
 
-    # Deprecated method names
+    def get_organisation(self, id, name=None):
+        '''
+        Get an organisation
 
-    def addAuthorisation(self, query_params):
-        return self.add_authorisation(query_params)
+        Returns:
+            Organisation: The organisation with the given `id`
+        '''
+        return self.create_organisation(dict(id=id, name=name))
 
-    def cleanPath(self, path):
-        return self.clean_path(path)
+    def get_board(self, id, name=None):
+        '''
+        Get a board
 
-    def checkErrors(self, uri, response):
-        self.check_errors(uri, response)
+        Returns:
+            Board: The board with the given `id`
+        '''
+        return self.create_board(dict(id=id, name=name))
 
-    def buildUri(self, path, query_params):
-        return self.build_uri(path, query_params)
+    def get_list(self, id, name=None):
+        '''
+        Get a list
 
-    def fetchJson(self, uri_path, http_method='GET', query_params={}, body=None, headers={}):
-        return self.fetch_json(uri_path, http_method, query_params, body, headers)
+        Returns:
+            List: The list with the given `id`
+        '''
+        return self.create_list(dict(id=id, name=name))
 
-    def createOrganisation(self, organisation_json):
-        return self.create_organisation(organisation_json)
+    def get_card(self, id, name=None):
+        '''
+        Get a card
 
-    def createBoard(self, board_json):
-        return self.create_board(board_json)
+        Returns:
+            Card: The card with the given `id`
+        '''
+        return self.create_card(dict(id=id, name=name))
 
-    def createList(self, list_json):
-        return self.create_list(list_json)
+    def get_checklist(self, id, name=None):
+        '''
+        Get a checklist
 
-    def createCard(self, card_json):
-        return self.create_card(card_json)
+        Returns:
+            Checklist: The checklist with the given `id`
+        '''
+        return self.create_checklist(dict(id=id, name=name))
 
-    def createChecklist(self, checklist_json):
-        return self.create_checklist(checklist_json)
+    def get_member(self, id='me', name=None):
+        '''
+        Get a member or your current member if `id` wasn't given.
 
-    def createMember(self, member_json):
-        return self.create_member(member_json)
+        Returns:
+            Member: The member with the given `id`, defaults to the
+            logged in member.
+        '''
+        return self.create_member(dict(id=id, fullName=name))
+
+    # Shortcut methods from the current member
+    def get_boards(self):
+        '''
+        Get all boards this member is attached to. Returns a list of Board
+        objects.
+
+        Returns:
+            list(Board): Return all boards for this member
+        '''
+        return self.get_member().get_boards()
+
+    def get_cards(self):
+        '''
+        Get all cards this member is attached to. Return a list of Card
+        objects.
+
+        Returns:
+            list(Card): Return all cards this member is attached to
+        '''
+        return self.get_member().get_cards()
+
+    def get_organisations(self):
+        '''
+        Get all organisations this member is part of. Return a list of
+        Organisation objects.
+
+        Returns:
+            list(Organisation): Return all organisations this member is
+            part of
+        '''
+        return self.get_member().get_organisations()
+

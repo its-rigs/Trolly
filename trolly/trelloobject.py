@@ -1,26 +1,30 @@
-"""
-Created on 9 Nov 2012
-
-@author: plish
-"""
 
 
 class TrelloObject(object):
-    """
+
+    '''
     This class is a base object that should be used by all trello objects;
     Board, List, Card, etc. It contains methods needed and used by all those
     objects and masks the client calls as methods belonging to the object.
-    """
+    '''
 
     def __init__(self, trello_client):
-        """
+        '''
         A Trello client, Oauth of HTTP client is required for each object.
-        """
+        '''
         super(TrelloObject, self).__init__()
 
         self.client = trello_client
 
-    def fetch_json(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
+    def __repr__(self):
+        return '<%s[%s] %s>' % (
+            self.__class__.__name__,
+            getattr(self, 'id', ''),
+            getattr(self, 'name', ''),
+        )
+
+    def fetch_json(self, uri_path, http_method='GET', query_params=None,
+                   body=None, headers=None):
         return self.client.fetch_json(
             uri_path=uri_path,
             http_method=http_method,
@@ -30,7 +34,7 @@ class TrelloObject(object):
         )
 
     def get_organisations_json(self, base_uri):
-        return self.fetch_json(base_uri + '/organization')
+        return self.fetch_json(base_uri + '/organizations')
 
     def get_boards_json(self, base_uri):
         return self.fetch_json(base_uri + '/boards')
@@ -54,65 +58,56 @@ class TrelloObject(object):
         return self.fetch_json(base_uri + '/members')
 
     def create_organisation(self, organisation_json, **kwargs):
+        '''
+        Create an Organisation object from a JSON object
+
+        Returns:
+            Organisation: The organisation from the given `organisation_json`.
+        '''
         return self.client.create_organisation(organisation_json, **kwargs)
 
     def create_board(self, board_json, **kwargs):
+        '''
+        Create Board object from a JSON object
+
+        Returns:
+            Board: The board from the given `board_json`.
+        '''
         return self.client.create_board(board_json, **kwargs)
 
     def create_list(self, list_json, **kwargs):
+        '''
+        Create List object from JSON object
+
+        Returns:
+            List: The list from the given `list_json`.
+        '''
         return self.client.create_list(list_json, **kwargs)
 
     def create_card(self, card_json, **kwargs):
+        '''
+        Create a Card object from JSON object
+
+        Returns:
+            Card: The card from the given `card_json`.
+        '''
         return self.client.create_card(card_json, **kwargs)
 
     def create_checklist(self, checklist_json, **kwargs):
+        '''
+        Create a Checklist object from JSON object
+
+        Returns:
+            Checklist: The checklist from the given `checklist_json`.
+        '''
         return self.client.create_checklist(checklist_json, **kwargs)
 
     def create_member(self, member_json, **kwargs):
+        '''
+        Create a Member object from JSON object
+
+        Returns:
+            Member: The member from the given `member_json`.
+        '''
         return self.client.create_member(member_json, **kwargs)
 
-    # Deprecated method names
-    def fetchJson(self, uri_path, http_method='GET', query_params=None, body=None, headers=None):
-        return self.fetch_json(uri_path, http_method, query_params or {}, body, headers or {})
-
-    def getOrganisationsJson(self, base_uri):
-        return self.get_organisations_json(base_uri)
-
-    def getBoardsJson(self, base_uri):
-        return self.get_boards_json(base_uri)
-
-    def getBoardJson(self, base_uri):
-        return self.get_board_json(base_uri)
-
-    def getListsJson(self, base_uri):
-        return self.get_lists_json(base_uri)
-
-    def getListJson(self, base_uri):
-        return self.get_list_json(base_uri)
-
-    def getCardsJson(self, base_uri):
-        return self.get_cards_json(base_uri)
-
-    def getChecklistsJson(self, base_uri):
-        return self.get_checklist_json(base_uri)
-
-    def getMembersJson(self, base_uri):
-        return self.get_members_json(base_uri)
-
-    def createOrganisation(self, organisation_json, **kwargs):
-        return self.create_organisation(organisation_json, **kwargs)
-
-    def createBoard(self, board_json, **kwargs):
-        return self.create_board(board_json, **kwargs)
-
-    def createList(self, list_json, **kwargs):
-        return self.create_list(list_json, **kwargs)
-
-    def createCard(self, card_json, **kwargs):
-        return self.create_card(card_json, **kwargs)
-
-    def createChecklist(self, checklist_json, **kwargs):
-        return self.create_checklist(checklist_json, **kwargs)
-
-    def createMember(self, member_json, **kwargs):
-        return self.create_member(member_json, **kwargs)

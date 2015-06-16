@@ -101,6 +101,30 @@ required by every Trello object, because of this it makes extending and
 overiding methods in this class very effective. This is where you would
 override the creating of an object, e.g. a Card, with your own object.
 
+Example usage of the client:
+
+::
+
+    client = trolly.client.Client(settings.API_KEY, settings.TOKEN)
+
+    print('Member: %s' % client.get_member())
+
+    print('Organisations:')
+    for organisation in client.get_organisations():
+        print(' - %s' % organisation)
+
+    print('Organisations:')
+    for organisation in client.get_organisations():
+        print(' - %s' % organisation)
+
+    print('Boards:')
+    for board in client.get_boards():
+        print(' - %s' % board)
+
+    print('Cards:')
+    for card in client.get_cards():
+        print(' - %s' % card)
+
 Trello Object
 ~~~~~~~~~~~~~
 
