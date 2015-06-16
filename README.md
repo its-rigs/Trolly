@@ -180,3 +180,6 @@ To run the tests navigate to the Trolly in a terminal and run:
 ## Licence
 
 This code is licenced under the [MIT Licence](http://opensource.org/licenses/mit-license.php)
+
+## Contributors
+- [Rick van Hatten]https://github.com/WoLpH
