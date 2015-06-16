@@ -39,6 +39,22 @@ class Board(trelloobject.TrelloObject):
 
         return lists_list
 
+    def get_labels(self):
+        '''
+        Get the labels attached to this board. Returns a label of Label
+        objects.
+
+        Returns:
+            list(Label): The labels attached to this board
+        '''
+        labels = self.get_labels_json(self.base_uri)
+
+        labels_list = []
+        for label_json in labels:
+            labels_list.append(self.create_label(label_json))
+
+        return labels_list
+
     def get_cards(self):
         '''
         Get the cards for this board. Returns a list of Card objects.
@@ -116,6 +132,18 @@ class Board(trelloobject.TrelloObject):
         )
 
         return self.create_list(list_json)
+
+    def add_label(self, query_params=None):
+        '''
+        Create a label for a board. Returns a new Label object.
+        '''
+        list_json = self.fetch_json(
+            uri_path=self.base_uri + '/lists',
+            http_method='POST',
+            query_params=query_params or {}
+        )
+
+        return self.create_label(list_json)
 
     def add_member_by_id(self, member_id, membership_type='normal'):
         '''

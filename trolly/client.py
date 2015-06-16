@@ -121,6 +121,19 @@ class Client(object):
             name=board_json['name']
         )
 
+    def create_label(self, label_json):
+        '''
+        Create Label object from JSON object
+
+        Returns:
+            Label: The label from the given `label_json`.
+        '''
+        return trolly.label.Label(
+            trello_client=self,
+            label_id=label_json['id'],
+            name=label_json['name']
+        )
+
     def create_list(self, list_json):
         '''
         Create List object from JSON object

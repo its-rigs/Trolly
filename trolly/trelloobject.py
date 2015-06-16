@@ -39,6 +39,9 @@ class TrelloObject(object):
     def get_boards_json(self, base_uri):
         return self.fetch_json(base_uri + '/boards')
 
+    def get_labels_json(self, base_uri):
+        return self.fetch_json(base_uri + '/labels')
+
     def get_board_json(self, base_uri):
         return self.fetch_json(base_uri + '/board')
 
@@ -83,6 +86,15 @@ class TrelloObject(object):
             List: The list from the given `list_json`.
         '''
         return self.client.create_list(list_json, **kwargs)
+
+    def create_label(self, label_json, **kwargs):
+        '''
+        Create Label object from JSON object
+
+        Returns:
+            Label: The label from the given `label_json`.
+        '''
+        return self.client.create_label(label_json, **kwargs)
 
     def create_card(self, card_json, **kwargs):
         '''
