@@ -169,6 +169,27 @@ class Card(trelloobject.TrelloObject):
             http_method='DELETE'
         )
 
+    def close_card(self):
+        '''
+        Close (archive) this card.
+        '''
+        return self.update_card({'closed': 'true'})
+
+    def archive_card(self):
+        '''
+        Close (archive) this card. (Synonym for close_card().)
+        '''
+        return self.close_card()
+
+    def delete_card(self):
+        '''
+        Permanently delete this card.
+        '''
+        return self.fetch_json(
+            uri_path=self.base_uri,
+            http_method='DELETE'
+        )
+
     def encode_multipart_formdata(self, fields, filename, file_values):
         '''
         Encodes data to updload a file to Trello.
