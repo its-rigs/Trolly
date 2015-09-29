@@ -18,7 +18,7 @@ class TrelloObject(object):
         self.data = kwargs.get('data', {})
 
     def __getattr__(self, key):
-        if key in self.data:
+        if key != 'data' and key in self.data:
             return self.data[key]
         else:
             raise AttributeError('Unknown attribute %s' % key)
