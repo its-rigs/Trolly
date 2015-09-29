@@ -7,8 +7,8 @@ class Checklist(trelloobject.TrelloObject):
     Class representing a Trello Checklist
     '''
 
-    def __init__(self, trello_client, checklist_id, name=''):
-        super(Checklist, self).__init__(trello_client)
+    def __init__(self, trello_client, checklist_id, name='', **kwargs):
+        super(Checklist, self).__init__(trello_client, **kwargs)
 
         self.id = checklist_id
         self.name = name
