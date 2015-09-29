@@ -3,8 +3,8 @@ from . import trelloobject
 
 class Organisation(trelloobject.TrelloObject):
 
-    def __init__(self, trello_client, organisation_id, name=''):
-        super(Organisation, self).__init__(trello_client)
+    def __init__(self, trello_client, organisation_id, name='', **kwargs):
+        super(Organisation, self).__init__(trello_client, **kwargs)
 
         self.id = organisation_id
         self.name = name

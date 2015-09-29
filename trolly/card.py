@@ -9,9 +9,8 @@ class Card(trelloobject.TrelloObject):
     Class representing a Trello Card
     '''
 
-    def __init__(self, trello_client, card_id, name=''):
-
-        super(Card, self).__init__(trello_client)
+    def __init__(self, trello_client, card_id, name='', **kwargs):
+        super(Card, self).__init__(trello_client, **kwargs)
 
         self.id = card_id
         self.name = name

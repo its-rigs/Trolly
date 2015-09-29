@@ -7,9 +7,8 @@ class Member(trelloobject.TrelloObject):
     Class representing a Trello Member
     '''
 
-    def __init__(self, trello_client, member_id, name=''):
-
-        super(Member, self).__init__(trello_client)
+    def __init__(self, trello_client, member_id, name='', **kwargs):
+        super(Member, self).__init__(trello_client, **kwargs)
         self.id = member_id
         self.name = name
 
