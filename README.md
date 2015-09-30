@@ -89,6 +89,11 @@ Example usage of the client:
     for card in client.get_cards():
         print(' - %s' % card)
 
+    # Get all information from a card (works for boards, lists, etc. too):
+    print('Detailed cards:')
+    for card in client.get_cards(actions='all'):
+        print(' - %s: %s' % (card, card.data))
+
 
 ### Trello Object
 

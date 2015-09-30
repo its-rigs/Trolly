@@ -249,7 +249,7 @@ class Client(object):
         return self.create_member(dict(id=id, fullName=name))
 
     # Shortcut methods from the current member
-    def get_boards(self):
+    def get_boards(self, **query_params):
         '''
         Get all boards this member is attached to. Returns a list of Board
         objects.
@@ -257,9 +257,9 @@ class Client(object):
         Returns:
             list(Board): Return all boards for this member
         '''
-        return self.get_member().get_boards()
+        return self.get_member().get_boards(**query_params)
 
-    def get_cards(self):
+    def get_cards(self, **query_params):
         '''
         Get all cards this member is attached to. Return a list of Card
         objects.
@@ -267,9 +267,9 @@ class Client(object):
         Returns:
             list(Card): Return all cards this member is attached to
         '''
-        return self.get_member().get_cards()
+        return self.get_member().get_cards(**query_params)
 
-    def get_organisations(self):
+    def get_organisations(self, **query_params):
         '''
         Get all organisations this member is part of. Return a list of
         Organisation objects.
@@ -278,5 +278,5 @@ class Client(object):
             list(Organisation): Return all organisations this member is
             part of
         '''
-        return self.get_member().get_organisations()
+        return self.get_member().get_organisations(**query_params)
 
