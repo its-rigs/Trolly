@@ -7,8 +7,8 @@ class Board(trelloobject.TrelloObject):
     Class representing a Trello Board
     '''
 
-    def __init__(self, trello_client, board_id, name=''):
-        super(Board, self).__init__(trello_client)
+    def __init__(self, trello_client, board_id, name='', **kwargs):
+        super(Board, self).__init__(trello_client, **kwargs)
 
         self.id = board_id
         self.name = name

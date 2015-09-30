@@ -7,8 +7,8 @@ class List(trelloobject.TrelloObject):
     Class representing a Trello List
     '''
 
-    def __init__(self, trello_client, list_id, name=''):
-        super(List, self).__init__(trello_client)
+    def __init__(self, trello_client, list_id, name='', **kwargs):
+        super(List, self).__init__(trello_client, **kwargs)
 
         self.id = list_id
         self.name = name

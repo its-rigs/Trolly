@@ -8,13 +8,20 @@ class TrelloObject(object):
     objects and masks the client calls as methods belonging to the object.
     '''
 
-    def __init__(self, trello_client):
+    def __init__(self, trello_client, **kwargs):
         '''
         A Trello client, Oauth of HTTP client is required for each object.
         '''
         super(TrelloObject, self).__init__()
 
         self.client = trello_client
+        self.data = kwargs.get('data', {})
+
+    def __getattr__(self, key):
+        if key != 'data' and key in self.data:
+            return self.data[key]
+        else:
+            raise AttributeError('Unknown attribute %s' % key)
 
     def __repr__(self):
         return '<%s[%s] %s>' % (
