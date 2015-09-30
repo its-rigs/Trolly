@@ -7,8 +7,8 @@ class Label(trelloobject.TrelloObject):
     Class representing a Trello Label
     '''
 
-    def __init__(self, trello_client, label_id, name=''):
-        super(Label, self).__init__(trello_client)
+    def __init__(self, trello_client, label_id, name='', **kwargs):
+        super(Label, self).__init__(trello_client, **kwargs)
 
         self.id = label_id
         self.name = name

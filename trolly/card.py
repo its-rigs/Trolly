@@ -9,9 +9,8 @@ class Card(trelloobject.TrelloObject):
     Class representing a Trello Card
     '''
 
-    def __init__(self, trello_client, card_id, name=''):
-
-        super(Card, self).__init__(trello_client)
+    def __init__(self, trello_client, card_id, name='', **kwargs):
+        super(Card, self).__init__(trello_client, **kwargs)
 
         self.id = card_id
         self.name = name
@@ -27,34 +26,37 @@ class Card(trelloobject.TrelloObject):
             query_params=query_params or {}
         )
 
-    def get_board(self):
+    def get_board(self, **query_params):
         '''
         Get board information for this card. Returns a Board object.
 
         Returns:
             Board: The board this card is attached to
         '''
-        board_json = self.get_board_json(self.base_uri)
+        board_json = self.get_board_json(self.base_uri,
+                                         query_params=query_params)
         return self.create_board(board_json)
 
-    def get_list(self):
+    def get_list(self, **query_params):
         '''
         Get list information for this card. Returns a List object.
 
         Returns:
             List: The list this card is attached to
         '''
-        list_json = self.get_list_json(self.base_uri)
+        list_json = self.get_list_json(self.base_uri,
+                                       query_params=query_params)
         return self.create_list(list_json)
 
-    def get_checklists(self):
+    def get_checklists(self, **query_params):
         '''
         Get the checklists for this card. Returns a list of Checklist objects.
 
         Returns:
             list(Checklist): The checklists attached to this card
         '''
-        checklists = self.get_checklist_json(self.base_uri)
+        checklists = self.get_checklist_json(self.base_uri,
+                                             query_params=query_params)
 
         checklists_list = []
         for checklist_json in checklists:
@@ -62,7 +64,7 @@ class Card(trelloobject.TrelloObject):
 
         return checklists_list
 
-    def get_members(self):
+    def get_members(self, **query_params):
         '''
         Get all members attached to this card. Returns a list of Member
         objects.
@@ -70,7 +72,8 @@ class Card(trelloobject.TrelloObject):
         Returns:
             list(Member): The members attached to this card
         '''
-        members = self.get_members_json(self.base_uri)
+        members = self.get_members_json(self.base_uri,
+                                        query_params=query_params)
 
         members_list = []
         for member_json in members:

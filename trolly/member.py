@@ -7,9 +7,8 @@ class Member(trelloobject.TrelloObject):
     Class representing a Trello Member
     '''
 
-    def __init__(self, trello_client, member_id, name=''):
-
-        super(Member, self).__init__(trello_client)
+    def __init__(self, trello_client, member_id, name='', **kwargs):
+        super(Member, self).__init__(trello_client, **kwargs)
         self.id = member_id
         self.name = name
 
@@ -27,7 +26,7 @@ class Member(trelloobject.TrelloObject):
             query_params=query_params or {}
         )
 
-    def get_boards(self):
+    def get_boards(self, **query_params):
         '''
         Get all boards this member is attached to. Returns a list of Board
         objects.
@@ -35,7 +34,7 @@ class Member(trelloobject.TrelloObject):
         Returns:
             list(Board): Return all boards for this member
         '''
-        boards = self.get_boards_json(self.base_uri)
+        boards = self.get_boards_json(self.base_uri, query_params=query_params)
 
         boards_list = []
         for board_json in boards:
@@ -43,7 +42,7 @@ class Member(trelloobject.TrelloObject):
 
         return boards_list
 
-    def get_cards(self):
+    def get_cards(self, **query_params):
         '''
         Get all cards this member is attached to. Return a list of Card
         objects.
@@ -51,7 +50,7 @@ class Member(trelloobject.TrelloObject):
         Returns:
             list(Card): Return all cards this member is attached to
         '''
-        cards = self.get_cards_json(self.base_uri)
+        cards = self.get_cards_json(self.base_uri, query_params=query_params)
 
         cards_list = []
         for card_json in cards:
@@ -59,7 +58,7 @@ class Member(trelloobject.TrelloObject):
 
         return cards_list
 
-    def get_organisations(self):
+    def get_organisations(self, **query_params):
         '''
         Get all organisations this member is attached to. Return a list of
         Organisation objects.
@@ -68,7 +67,8 @@ class Member(trelloobject.TrelloObject):
             list(Organisation): Return all organisations this member is
             attached to
         '''
-        organisations = self.get_organisations_json(self.base_uri)
+        organisations = self.get_organisations_json(self.base_uri,
+                                                    query_params=query_params)
 
         organisations_list = []
         for organisation_json in organisations:

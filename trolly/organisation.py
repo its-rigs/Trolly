@@ -3,8 +3,8 @@ from . import trelloobject
 
 class Organisation(trelloobject.TrelloObject):
 
-    def __init__(self, trello_client, organisation_id, name=''):
-        super(Organisation, self).__init__(trello_client)
+    def __init__(self, trello_client, organisation_id, name='', **kwargs):
+        super(Organisation, self).__init__(trello_client, **kwargs)
 
         self.id = organisation_id
         self.name = name
@@ -20,14 +20,14 @@ class Organisation(trelloobject.TrelloObject):
             query_params=query_params or {}
         )
 
-    def get_boards(self):
+    def get_boards(self, **query_params):
         '''
         Get all the boards for this organisation. Returns a list of Board s.
 
         Returns:
             list(Board): The boards attached to this organisation
         '''
-        boards = self.get_boards_json(self.base_uri)
+        boards = self.get_boards_json(self.base_uri, query_params=query_params)
 
         boards_list = []
         for board_json in boards:
@@ -35,7 +35,7 @@ class Organisation(trelloobject.TrelloObject):
 
         return boards_list
 
-    def get_members(self):
+    def get_members(self, **query_params):
         '''
         Get all members attached to this organisation. Returns a list of
         Member objects
@@ -43,7 +43,8 @@ class Organisation(trelloobject.TrelloObject):
         Returns:
             list(Member): The members attached to this organisation
         '''
-        members = self.get_members_json(self.base_uri)
+        members = self.get_members_json(self.base_uri,
+                                        query_params=query_params)
 
         members_list = []
         for member_json in members:

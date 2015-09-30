@@ -8,13 +8,20 @@ class TrelloObject(object):
     objects and masks the client calls as methods belonging to the object.
     '''
 
-    def __init__(self, trello_client):
+    def __init__(self, trello_client, **kwargs):
         '''
         A Trello client, Oauth of HTTP client is required for each object.
         '''
         super(TrelloObject, self).__init__()
 
         self.client = trello_client
+        self.data = kwargs.get('data', {})
+
+    def __getattr__(self, key):
+        if key != 'data' and key in self.data:
+            return self.data[key]
+        else:
+            raise AttributeError('Unknown attribute %s' % key)
 
     def __repr__(self):
         return '<%s[%s] %s>' % (
@@ -33,32 +40,38 @@ class TrelloObject(object):
             headers=headers or {}
         )
 
-    def get_organisations_json(self, base_uri):
-        return self.fetch_json(base_uri + '/organizations')
+    def get_comments(self, query_params=None):
+        return self.fetch_json(self.base_uri, query_params=query_params)
 
-    def get_boards_json(self, base_uri):
-        return self.fetch_json(base_uri + '/boards')
+    def get_organisations_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/organizations',
+                               query_params=query_params)
 
-    def get_labels_json(self, base_uri):
-        return self.fetch_json(base_uri + '/labels')
+    def get_boards_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/boards', query_params=query_params)
 
-    def get_board_json(self, base_uri):
-        return self.fetch_json(base_uri + '/board')
+    def get_labels_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/labels', query_params=query_params)
 
-    def get_lists_json(self, base_uri):
-        return self.fetch_json(base_uri + '/lists')
+    def get_board_json(self, base_uri, actions='all', query_params=None):
+        return self.fetch_json(base_uri + '/board', query_params=query_params)
 
-    def get_list_json(self, base_uri):
-        return self.fetch_json(base_uri + '/list')
+    def get_lists_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/lists', query_params=query_params)
 
-    def get_cards_json(self, base_uri):
-        return self.fetch_json(base_uri + '/cards')
+    def get_list_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/list', query_params=query_params)
 
-    def get_checklist_json(self, base_uri):
-        return self.fetch_json(base_uri + '/checklists')
+    def get_cards_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/cards', query_params=query_params)
 
-    def get_members_json(self, base_uri):
-        return self.fetch_json(base_uri + '/members')
+    def get_checklist_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/checklists',
+                               query_params=query_params)
+
+    def get_members_json(self, base_uri, query_params=None):
+        return self.fetch_json(base_uri + '/members',
+                               query_params=query_params)
 
     def create_organisation(self, organisation_json, **kwargs):
         '''

@@ -7,8 +7,8 @@ class Board(trelloobject.TrelloObject):
     Class representing a Trello Board
     '''
 
-    def __init__(self, trello_client, board_id, name=''):
-        super(Board, self).__init__(trello_client)
+    def __init__(self, trello_client, board_id, name='', **kwargs):
+        super(Board, self).__init__(trello_client, **kwargs)
 
         self.id = board_id
         self.name = name
@@ -24,14 +24,14 @@ class Board(trelloobject.TrelloObject):
             query_params=query_params or {}
         )
 
-    def get_lists(self):
+    def get_lists(self, **query_params):
         '''
         Get the lists attached to this board. Returns a list of List objects.
 
         Returns:
             list(List): The lists attached to this board
         '''
-        lists = self.get_lists_json(self.base_uri)
+        lists = self.get_lists_json(self.base_uri, query_params=query_params)
 
         lists_list = []
         for list_json in lists:
@@ -39,7 +39,7 @@ class Board(trelloobject.TrelloObject):
 
         return lists_list
 
-    def get_labels(self):
+    def get_labels(self, **query_params):
         '''
         Get the labels attached to this board. Returns a label of Label
         objects.
@@ -47,7 +47,7 @@ class Board(trelloobject.TrelloObject):
         Returns:
             list(Label): The labels attached to this board
         '''
-        labels = self.get_labels_json(self.base_uri)
+        labels = self.get_labels_json(self.base_uri, query_params=query_params)
 
         labels_list = []
         for label_json in labels:
@@ -55,14 +55,14 @@ class Board(trelloobject.TrelloObject):
 
         return labels_list
 
-    def get_cards(self):
+    def get_cards(self, **query_params):
         '''
         Get the cards for this board. Returns a list of Card objects.
 
         Returns:
             list(Card): The cards attached to this board
         '''
-        cards = self.get_cards_json(self.base_uri)
+        cards = self.get_cards_json(self.base_uri, query_params=query_params)
 
         cards_list = []
         for card_json in cards:
@@ -70,7 +70,7 @@ class Board(trelloobject.TrelloObject):
 
         return cards_list
 
-    def get_card(self, card_id):
+    def get_card(self, card_id, **query_params):
         '''
         Get a Card for a given card id. Returns a Card object.
 
@@ -83,14 +83,15 @@ class Board(trelloobject.TrelloObject):
 
         return self.create_card(card_json)
 
-    def get_members(self):
+    def get_members(self, **query_params):
         '''
         Get Members attached to this board. Returns a list of Member objects.
 
         Returns:
             list(Member): The members attached to this board
         '''
-        members = self.get_members_json(self.base_uri)
+        members = self.get_members_json(self.base_uri,
+                                        query_params=query_params)
 
         members_list = []
         for member_json in members:
@@ -98,14 +99,15 @@ class Board(trelloobject.TrelloObject):
 
         return members_list
 
-    def get_organisation(self):
+    def get_organisation(self, **query_params):
         '''
         Get the Organisation for this board. Returns Organisation object.
 
         Returns:
             list(Organisation): The organisation attached to this board
         '''
-        organisation_json = self.get_organisations_json(self.base_uri)
+        organisation_json = self.get_organisations_json(
+            self.base_uri, query_params=query_params)
 
         return self.create_organisation(organisation_json)
 

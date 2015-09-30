@@ -105,7 +105,8 @@ class Client(object):
         return trolly.organisation.Organisation(
             trello_client=self,
             organisation_id=organisation_json['id'],
-            name=organisation_json['name']
+            name=organisation_json['name'],
+            data=organisation_json,
         )
 
     def create_board(self, board_json):
@@ -118,7 +119,8 @@ class Client(object):
         return trolly.board.Board(
             trello_client=self,
             board_id=board_json['id'],
-            name=board_json['name']
+            name=board_json['name'],
+            data=board_json,
         )
 
     def create_label(self, label_json):
@@ -131,7 +133,8 @@ class Client(object):
         return trolly.label.Label(
             trello_client=self,
             label_id=label_json['id'],
-            name=label_json['name']
+            name=label_json['name'],
+            data=label_json,
         )
 
     def create_list(self, list_json):
@@ -144,7 +147,8 @@ class Client(object):
         return trolly.list.List(
             trello_client=self,
             list_id=list_json['id'],
-            name=list_json['name']
+            name=list_json['name'],
+            data=list_json,
         )
 
     def create_card(self, card_json):
@@ -157,7 +161,8 @@ class Client(object):
         return trolly.card.Card(
             trello_client=self,
             card_id=card_json['id'],
-            name=card_json['name']
+            name=card_json['name'],
+            data=card_json,
         )
 
     def create_checklist(self, checklist_json):
@@ -170,7 +175,8 @@ class Client(object):
         return trolly.checklist.Checklist(
             trello_client=self,
             checklist_id=checklist_json['id'],
-            name=checklist_json['name']
+            name=checklist_json['name'],
+            data=checklist_json,
         )
 
     def create_member(self, member_json):
@@ -183,7 +189,8 @@ class Client(object):
         return trolly.member.Member(
             trello_client=self,
             member_id=member_json['id'],
-            name=member_json['fullName']
+            name=member_json['fullName'],
+            data=member_json,
         )
 
     def get_organisation(self, id, name=None):
@@ -242,7 +249,7 @@ class Client(object):
         return self.create_member(dict(id=id, fullName=name))
 
     # Shortcut methods from the current member
-    def get_boards(self):
+    def get_boards(self, **query_params):
         '''
         Get all boards this member is attached to. Returns a list of Board
         objects.
@@ -250,9 +257,9 @@ class Client(object):
         Returns:
             list(Board): Return all boards for this member
         '''
-        return self.get_member().get_boards()
+        return self.get_member().get_boards(**query_params)
 
-    def get_cards(self):
+    def get_cards(self, **query_params):
         '''
         Get all cards this member is attached to. Return a list of Card
         objects.
@@ -260,9 +267,9 @@ class Client(object):
         Returns:
             list(Card): Return all cards this member is attached to
         '''
-        return self.get_member().get_cards()
+        return self.get_member().get_cards(**query_params)
 
-    def get_organisations(self):
+    def get_organisations(self, **query_params):
         '''
         Get all organisations this member is part of. Return a list of
         Organisation objects.
@@ -271,5 +278,5 @@ class Client(object):
             list(Organisation): Return all organisations this member is
             part of
         '''
-        return self.get_member().get_organisations()
+        return self.get_member().get_organisations(**query_params)
 

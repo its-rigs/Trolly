@@ -4,6 +4,7 @@ __all__ = [
     'Checklist',
     'Client',
     'List',
+    'Label',
     'Member',
     'Organisation',
     'ResourceUnavailable',
