@@ -6,9 +6,11 @@ Created on 15 Feb 2013
 
 from distutils.core import setup
 
+
+
 setup( 
         name = 'Trolly',
-        version = '0.2.1',
+        version = '0.2.2',
         author = 'plish',
         author_email = 'plish.development@gmail.com',
         url = 'https://github.com/plish/Trolly',
