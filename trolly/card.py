@@ -1,5 +1,6 @@
 import mimetypes
 
+from warnings import warn
 from . import trelloobject
 
 
@@ -137,15 +138,24 @@ class Card(trelloobject.TrelloObject):
 
         return self.create_checklist(checklist_json)
 
-    def add_labels(self, query_params=None):
+    def add_label(self, query_params=None, label=None):
         '''
         Add a label to this card.
         '''
-        return self.fetch_json(
-            uri_path=self.base_uri + '/labels',
-            http_method='POST',
-            query_params=query_params or {}
-        )
+        if query_params and label:
+            warn('Ignoring `label` parameter')
+        elif label:
+            return self.fetch_json(
+                uri_path=self.base_uri + '/idLabels',
+                http_method='POST',
+                query_params={'value': label.id}
+            )
+        else:
+            return self.fetch_json(
+                uri_path=self.base_uri + '/labels',
+                http_method='POST',
+                query_params=query_params or {}
+            )
 
     def add_member(self, member_id):
         '''
