@@ -152,7 +152,7 @@ class Card(trelloobject.TrelloObject):
         Add a member to this card. Returns a list of Member objects.
         '''
         members = self.fetch_json(
-            uri_path=self.base_uri + '/members',
+            uri_path=self.base_uri + '/idMembers',
             http_method='POST',
             query_params={'value': member_id}
         )
@@ -168,7 +168,7 @@ class Card(trelloobject.TrelloObject):
         Remove a member from this card.
         '''
         return self.fetch_json(
-            uri_path=self.base_uri + '/members/' + member_id,
+            uri_path=self.base_uri + '/idMembers/' + member_id,
             http_method='DELETE'
         )
 
