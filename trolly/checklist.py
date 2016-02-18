@@ -24,10 +24,19 @@ class Checklist(trelloobject.TrelloObject):
         '''
         Get all information for this Checklist. Returns a dictionary of values.
         '''
+        # TODO: why not use trelloobject.TrelloObject.get_checklist_json ?
         return self.fetch_json(
             uri_path=self.base_uri,
             query_params=query_params or {}
         )
+
+    def get_card(self):
+        '''
+        Get card this checklist is on.
+        '''
+        card_id = self.get_checklist_information().get('idCard', None)
+        if card_id:
+            return self.client.get_card(card_id)
 
     def get_items(self, query_params=None):
         '''
@@ -43,9 +52,10 @@ class Checklist(trelloobject.TrelloObject):
         """
         Get the items for this checklist. Returns a list of ChecklistItem objects.
         """
+        card = self.get_card()
         checklistitems_list = []
-        for checklistitem_json in self.getItems(query_params):
-            checklistitems_list.append(self.create_checklist_item(self.idCard, self.id, checklistitem_json))
+        for checklistitem_json in self.get_items(query_params):
+            checklistitems_list.append(self.create_checklist_item(card.id, self.id, checklistitem_json))
 
         return checklistitems_list
 
@@ -83,7 +93,7 @@ class Checklist(trelloobject.TrelloObject):
         )
 
 
-class ChecklistItem(TrelloObject):
+class ChecklistItem(trelloobject.TrelloObject):
     """
     Class representing a Trello Checklist Item
     """
