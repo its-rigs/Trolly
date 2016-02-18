@@ -10,11 +10,6 @@ class Checklist(trelloobject.TrelloObject):
     def __init__(self, trello_client, checklist_id, name='', **kwargs):
         super(Checklist, self).__init__(trello_client, **kwargs)
 
-        card_id = kwargs.get('card_id', None)
-        if not card_id:
-            # TODO: lookup card id
-            pass
-        self.idCard = card_id
         self.id = checklist_id
         self.name = name
 
