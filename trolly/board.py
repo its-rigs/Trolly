@@ -97,7 +97,7 @@ class Board(trelloobject.TrelloObject):
 
 
     def get_members(self, **query_params):
-        """
+        '''
         Get Members attached to this board. Returns a list of Member objects.
 
         Returns:
