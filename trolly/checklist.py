@@ -19,7 +19,8 @@ class Checklist(trelloobject.TrelloObject):
         '''
         Get all information for this Checklist. Returns a dictionary of values.
         '''
-        # TODO: why not use trelloobject.TrelloObject.get_checklist_json ?
+        # We don't use trelloobject.TrelloObject.get_checklist_json, because
+        # that is meant to return lists of checklists.
         return self.fetch_json(
             uri_path=self.base_uri,
             query_params=query_params or {}
