@@ -127,6 +127,12 @@ class TrelloObject(object):
         '''
         return self.client.create_checklist(checklist_json, **kwargs)
 
+    def create_checklist_item(self, card_id, checklist_id, checklistitem_json, **kwargs):
+        '''
+        Create a ChecklistItem object from JSON object
+        '''
+        return self.client.create_checklist_item(card_id, checklist_id, checklistitem_json, **kwargs)
+
     def create_member(self, member_json, **kwargs):
         '''
         Create a Member object from JSON object
