@@ -10,13 +10,13 @@ from distutils.core import setup
 
 setup( 
         name = 'Trolly',
-        version = '0.2.2',
+        version = '1.2.2',
         author = 'plish',
         author_email = 'plish.development@gmail.com',
         url = 'https://github.com/plish/Trolly',
         packages = ['trolly'],
         license = 'LICENCE.txt',
-        install_requires = ['httplib2'],
+        install_requires = ['httplib2', 'singledispatch'],
         description = 'Trello API Wrapper',
         long_description = 'For more detail please see the github page'
     )

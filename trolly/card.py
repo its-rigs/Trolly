@@ -1,7 +1,24 @@
 import mimetypes
 
 from warnings import warn
+from functools import update_wrapper
+from singledispatch import singledispatch
 from . import trelloobject
+from . import label
+
+
+def singledispatchmethod(method):
+    '''
+    Enable singledispatch for class methods.
+
+    See http://stackoverflow.com/a/24602374/274318
+    '''
+    dispatcher = singledispatch(method)
+    def wrapper(*args, **kw):
+        return dispatcher.dispatch(args[1].__class__)(*args, **kw)
+    wrapper.register = dispatcher.register
+    update_wrapper(wrapper, dispatcher)
+    return wrapper
 
 
 class Card(trelloobject.TrelloObject):
@@ -138,24 +155,31 @@ class Card(trelloobject.TrelloObject):
 
         return self.create_checklist(checklist_json)
 
-    def add_label(self, query_params=None, label=None):
+    @singledispatchmethod
+    def add_label(self):
+        return NotImplemented
+
+    @add_label.register(dict)
+    def _add_label_from_dict(self, query_params=None):
         '''
-        Add a label to this card.
+        Add a label to this card, from a dictionary.
         '''
-        if query_params and label:
-            warn('Ignoring `label` parameter')
-        elif label:
-            return self.fetch_json(
-                uri_path=self.base_uri + '/idLabels',
-                http_method='POST',
-                query_params={'value': label.id}
-            )
-        else:
-            return self.fetch_json(
-                uri_path=self.base_uri + '/labels',
-                http_method='POST',
-                query_params=query_params or {}
-            )
+        return self.fetch_json(
+            uri_path=self.base_uri + '/labels',
+            http_method='POST',
+            query_params=query_params or {}
+        )
+
+    @add_label.register(label.Label)
+    def _add_label_from_class(self, label=None):
+        '''
+        Add an existing label to this card.
+        '''
+        return self.fetch_json(
+            uri_path=self.base_uri + '/idLabels',
+            http_method='POST',
+            query_params={'value': label.id}
+        )
 
     def add_member(self, member_id):
         '''
