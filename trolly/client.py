@@ -183,7 +183,7 @@ class Client(object):
         """
         Create a ChecklistItem object from JSON object
         """
-        return ChecklistItem(
+        return trolly.checklist.ChecklistItem(
             trello_client=self,
             card_id=card_id,
             checklist_id=checklist_id,
