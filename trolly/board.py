@@ -140,7 +140,7 @@ class Board(trelloobject.TrelloObject):
         Create a label for a board. Returns a new Label object.
         '''
         list_json = self.fetch_json(
-            uri_path=self.base_uri + '/lists',
+            uri_path=self.base_uri + '/labels',
             http_method='POST',
             query_params=query_params or {}
         )

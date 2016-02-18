@@ -93,7 +93,7 @@ class Card(trelloobject.TrelloObject):
 
         return self.create_card(card_json)
 
-    def add_comments(self, comment_text):
+    def add_comment(self, comment_text):
         '''
         Adds a comment to this card by the current user.
         '''
@@ -125,7 +125,7 @@ class Card(trelloobject.TrelloObject):
             headers={'Content-Type': content_type},
         )
 
-    def add_checklists(self, query_params=None):
+    def add_checklist(self, query_params=None):
         '''
         Add a checklist to this card. Returns a Checklist object.
         '''
@@ -137,7 +137,7 @@ class Card(trelloobject.TrelloObject):
 
         return self.create_checklist(checklist_json)
 
-    def add_labels(self, query_params=None):
+    def add_label(self, query_params=None):
         '''
         Add a label to this card.
         '''
@@ -152,7 +152,7 @@ class Card(trelloobject.TrelloObject):
         Add a member to this card. Returns a list of Member objects.
         '''
         members = self.fetch_json(
-            uri_path=self.base_uri + '/members',
+            uri_path=self.base_uri + '/idMembers',
             http_method='POST',
             query_params={'value': member_id}
         )
@@ -168,7 +168,7 @@ class Card(trelloobject.TrelloObject):
         Remove a member from this card.
         '''
         return self.fetch_json(
-            uri_path=self.base_uri + '/members/' + member_id,
+            uri_path=self.base_uri + '/idMembers/' + member_id,
             http_method='DELETE'
         )
 
