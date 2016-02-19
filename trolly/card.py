@@ -1,6 +1,5 @@
 import mimetypes
 
-from warnings import warn
 from functools import update_wrapper
 from singledispatch import singledispatch
 from . import trelloobject

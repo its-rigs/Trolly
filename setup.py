@@ -10,7 +10,7 @@ from distutils.core import setup
 
 setup( 
         name = 'Trolly',
-        version = '1.2.2',
+        version = '1.0.0',
         author = 'plish',
         author_email = 'plish.development@gmail.com',
         url = 'https://github.com/plish/Trolly',
