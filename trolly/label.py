@@ -1,5 +1,7 @@
 from . import trelloobject
 
+from .lib import singledispatchmethod
+
 
 class Label(trelloobject.TrelloObject):
 
@@ -34,9 +36,14 @@ class Label(trelloobject.TrelloObject):
             query_params=query_params or {}
         )
 
-    def update_label(self, name):
+    @singledispatchmethod
+    def update_label(self):
+        return NotImplemented
+
+    @update_label.register(str)
+    def _update_label_name(self, name):
         '''
-        Update the current label. Returns a new Label object.
+        Update the current label's name. Returns a new Label object.
         '''
         label_json = self.fetch_json(
             uri_path=self.base_uri,
@@ -46,3 +53,15 @@ class Label(trelloobject.TrelloObject):
 
         return self.create_label(label_json)
 
+    @update_label.register(dict)
+    def _update_label_dict(self, query_params={}):
+        '''
+        Update the current label. Returns a new Label object.
+        '''
+        label_json = self.fetch_json(
+            uri_path=self.base_uri,
+            http_method='PUT',
+            query_params=query_params
+        )
+
+        return self.create_label(label_json)
