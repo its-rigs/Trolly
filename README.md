@@ -1,3 +1,5 @@
+#:rotating_light: No longer active :rotating_light:
+
 # Trolly
 
 A Python wrapper around the Trello API. Provides a group of Python classes to represent Trello Objects. None of the 
