@@ -1,4 +1,4 @@
-#:rotating_light: No longer active :rotating_light:
+# :rotating_light: NO LONGER ACTIVE :rotating_light:
 
 # Trolly
 
